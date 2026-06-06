@@ -231,6 +231,31 @@ a:hover { color: var(--color-primary); }
     radial-gradient(ellipse at 80% 20%, rgba(229, 62, 62, 0.08) 0%, transparent 50%);
 }
 
+.hero-brain {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-brain img {
+  width: auto;
+  height: 90%;
+  max-height: 700px;
+  object-fit: contain;
+  opacity: 0.2;
+  filter: blur(1px);
+  animation: brain-pulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes brain-pulse {
+  0% { opacity: 0.15; transform: scale(1); }
+  100% { opacity: 0.25; transform: scale(1.03); }
+}
+
 .hero-content {
   position: relative;
   text-align: center;
