@@ -220,15 +220,15 @@ a:hover { color: var(--color-primary); }
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #0f1b2d 0%, #1a365d 40%, #2b6cb0 100%);
+  background: linear-gradient(135deg, #020617 0%, #0b1329 50%, #111e38 100%); /* Deeper dark blue gradient */
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(49, 130, 206, 0.15) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(229, 62, 62, 0.08) 0%, transparent 50%);
+    radial-gradient(ellipse at 20% 50%, rgba(49, 130, 206, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(229, 62, 62, 0.04) 0%, transparent 50%);
   z-index: 0;
 }
 
@@ -239,7 +239,7 @@ a:hover { color: var(--color-primary); }
   width: 100%;
   height: 100%;
   display: block;
-  opacity: 0.6;
+  opacity: 0.35; /* Lower opacity for higher text legibility */
   z-index: 1;
   pointer-events: none;
 }
@@ -247,7 +247,7 @@ a:hover { color: var(--color-primary); }
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(15, 27, 45, 0.15) 0%, rgba(9, 14, 23, 0.6) 100%);
+  background: radial-gradient(circle at center, rgba(2, 6, 23, 0.3) 0%, rgba(2, 6, 23, 0.8) 100%); /* Darker overlay mask */
   z-index: 2;
   pointer-events: none;
 }
@@ -255,30 +255,24 @@ a:hover { color: var(--color-primary); }
 .hero-content {
   position: relative;
   text-align: center;
-  max-width: 800px;
-  padding: 3.5rem 3rem;
-  margin: 0 1.5rem;
+  max-width: 850px;
+  padding: 2rem;
   z-index: 3;
-  background: rgba(10, 20, 35, 0.55);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 20px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
 }
 
 .hero-badge {
   display: inline-block;
   padding: 0.4rem 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 50px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   margin-bottom: 2rem;
   backdrop-filter: blur(8px);
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.04);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero h1 {
@@ -288,17 +282,17 @@ a:hover { color: var(--color-primary); }
   color: #fff;
   line-height: 1.15;
   margin-bottom: 1.5rem;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.7); /* Extra strong text shadow */
 }
 
 .hero-subtitle {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.6;
   max-width: 680px;
   margin: 0 auto 2.5rem;
   font-weight: 300;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.6); /* Extra strong text shadow */
 }
 
 .hero-actions {
@@ -983,6 +977,16 @@ a:hover { color: var(--color-primary); }
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--color-accent);
+  margin-bottom: 0.2rem;
+}
+
+.organizer-role-secondary {
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-light);
+  margin-top: -0.1rem;
   margin-bottom: 0.75rem;
 }
 
