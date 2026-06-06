@@ -96,7 +96,7 @@ a:hover { color: var(--color-primary); }
 }
 
 .navbar.scrolled .nav-logo {
-  color: var(--color-primary);
+  color: var(--color-primary-lighter);
 }
 
 .nav-links {
@@ -231,29 +231,12 @@ a:hover { color: var(--color-primary); }
     radial-gradient(ellipse at 80% 20%, rgba(229, 62, 62, 0.08) 0%, transparent 50%);
 }
 
-.hero-brain {
+.hero-neurons {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  background: url('neurons_bg.png') center center / cover no-repeat;
+  opacity: 0.35;
   z-index: 0;
-}
-
-.hero-brain img {
-  width: auto;
-  height: 90%;
-  max-height: 700px;
-  object-fit: contain;
-  opacity: 0.2;
-  filter: blur(1px);
-  animation: brain-pulse 8s ease-in-out infinite alternate;
-}
-
-@keyframes brain-pulse {
-  0% { opacity: 0.15; transform: scale(1); }
-  100% { opacity: 0.25; transform: scale(1.03); }
 }
 
 .hero-content {
