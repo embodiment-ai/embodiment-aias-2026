@@ -210,13 +210,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       draw() {
         // Draw wavy axon connection (clearly visible blue filament)
+        const isFiring = (this.activeSignalsCount || 0) > 0;
         ctx.beginPath();
         ctx.moveTo(this.from.x, this.from.y);
         for (let i = 1; i < this.wavyPoints.length; i++) {
           ctx.lineTo(this.wavyPoints[i].x, this.wavyPoints[i].y);
         }
-        ctx.strokeStyle = 'rgba(66, 153, 225, 0.16)'; // More opaque and visible
-        ctx.lineWidth = 1.0;
+        // Firing pathways light up bright neon, resting filaments are clear blue lines
+        ctx.strokeStyle = isFiring ? 'rgba(144, 205, 244, 0.65)' : 'rgba(66, 153, 225, 0.32)';
+        ctx.lineWidth = isFiring ? 1.6 : 1.0;
         ctx.stroke();
       }
 
@@ -242,6 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
         this.connection = connection;
         this.progress = 0;
         this.speed = speed;
+        // Increment active signals on this connection to trigger glowing line
+        this.connection.activeSignalsCount = (this.connection.activeSignalsCount || 0) + 1;
       }
 
       update() {
@@ -249,6 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (this.progress >= 1) {
           this.progress = 1;
           this.connection.to.fire();
+          this.connection.activeSignalsCount = Math.max(0, this.connection.activeSignalsCount - 1);
           
           // Neural Cascade: trigger signals to other neighbors of the reached node
           if (Math.random() < 0.6) { // 60% propagation chance

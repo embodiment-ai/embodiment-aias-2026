@@ -239,7 +239,7 @@ a:hover { color: var(--color-primary); }
   width: 100%;
   height: 100%;
   display: block;
-  opacity: 0.35; /* Lower opacity for higher text legibility */
+  opacity: 0.85; /* Increased opacity for clear visibility of lines */
   z-index: 1;
   pointer-events: none;
 }
