@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSection = document.getElementById('hero');
 
     let width = canvas.width = window.innerWidth;
-    let height = canvas.height = heroSection.offsetHeight;
+    let height = canvas.height = window.innerHeight;
 
     const numNeurons = Math.min(45, Math.floor((width * height) / 20000));
     const neurons = [];
@@ -374,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const resize = () => {
       width = canvas.width = window.innerWidth;
-      height = canvas.height = heroSection.offsetHeight;
+      height = canvas.height = window.innerHeight;
     };
 
     window.addEventListener('resize', resize);
