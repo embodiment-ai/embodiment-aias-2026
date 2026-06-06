@@ -98,4 +98,95 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.addEventListener('scroll', highlightNav, { passive: true });
+
+  // --- Dynamic Neuron Canvas Animation ---
+  const canvas = document.getElementById('neuron-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = canvas.offsetWidth;
+    let height = canvas.height = canvas.offsetHeight;
+
+    const numNodes = Math.min(80, Math.floor((width * height) / 12000));
+    const nodes = [];
+    const connectionDist = 130;
+
+    class Node {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
+        this.radius = Math.random() * 2 + 1.5;
+        this.pulse = Math.random() * Math.PI;
+        this.pulseSpeed = 0.005 + Math.random() * 0.015;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.pulse += this.pulseSpeed;
+
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        const brightness = 0.4 + Math.sin(this.pulse) * 0.5; // pulsing brightness
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(66, 153, 225, ${brightness})`; // Light blue (#4299e1)
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = 'rgba(66, 153, 225, 0.8)';
+        ctx.fill();
+        ctx.shadowBlur = 0; // reset
+      }
+    }
+
+    for (let i = 0; i < numNodes; i++) {
+      nodes.push(new Node());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Update and draw nodes
+      nodes.forEach(node => {
+        node.update();
+        node.draw();
+      });
+
+      // Draw connections (synapses)
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < connectionDist) {
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            
+            // Connection opacity depends on distance and node pulse
+            const avgPulse = (nodes[i].pulse + nodes[j].pulse) / 2;
+            const pulseFactor = 0.3 + Math.sin(avgPulse) * 0.5;
+            const alpha = (1 - dist / connectionDist) * 0.25 * pulseFactor;
+            
+            ctx.strokeStyle = `rgba(66, 153, 225, ${alpha})`;
+            ctx.lineWidth = 0.9;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    });
+
+    animate();
+  }
 });
