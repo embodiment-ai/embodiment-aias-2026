@@ -514,6 +514,98 @@ a:hover { color: var(--color-primary); }
   line-height: 1.6;
 }
 
+/* --- Paper Preview Card --- */
+.paper-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.paper-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.paper-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.paper-thumbnail {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.paper-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.4s ease;
+}
+
+.paper-card:hover .paper-thumbnail img {
+  transform: scale(1.03);
+}
+
+.paper-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 54, 93, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.paper-card:hover .paper-overlay {
+  opacity: 1;
+}
+
+.paper-overlay span {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.6rem 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+}
+
+.paper-meta {
+  padding: 1.25rem;
+}
+
+.paper-journal {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.4rem;
+}
+
+.paper-meta h4 {
+  font-size: 0.95rem;
+  color: var(--color-primary);
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.paper-authors {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  line-height: 1.4;
+}
+
 /* --- Objectives --- */
 .objectives-grid {
   display: grid;
