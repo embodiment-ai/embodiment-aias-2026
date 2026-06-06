@@ -103,90 +103,136 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('neuron-canvas');
   if (canvas) {
     const ctx = canvas.getContext('2d');
-    let width = canvas.width = canvas.offsetWidth;
-    let height = canvas.height = canvas.offsetHeight;
+    const heroSection = document.getElementById('hero');
 
-    const numNodes = Math.min(80, Math.floor((width * height) / 12000));
-    const nodes = [];
-    const connectionDist = 130;
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = heroSection.offsetHeight;
 
-    class Node {
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.3;
-        this.vy = (Math.random() - 0.5) * 0.3;
-        this.radius = Math.random() * 2 + 1.5;
-        this.pulse = Math.random() * Math.PI;
-        this.pulseSpeed = 0.005 + Math.random() * 0.015;
+    class NeuralPathway {
+      constructor(index) {
+        this.index = index;
+        this.reset();
+        // Stagger initial progress of signals
+        this.pulses = [
+          { progress: Math.random(), speed: 0.0015 + Math.random() * 0.002, size: Math.random() * 2 + 1.5 },
+          { progress: Math.random() - 0.5, speed: 0.0015 + Math.random() * 0.002, size: Math.random() * 2 + 1.5 }
+        ];
+        this.angle = Math.random() * Math.PI * 2;
+        this.driftSpeed = 0.0008 + Math.random() * 0.0008;
+      }
+
+      reset() {
+        // Paths go left-to-right or right-to-left
+        this.direction = Math.random() > 0.5 ? 1 : -1;
+        this.yStart = Math.random() * height;
+        this.yEnd = Math.random() * height;
+        this.cp1x = width * 0.25;
+        this.cp1y = Math.random() * height;
+        this.cp2x = width * 0.75;
+        this.cp2y = Math.random() * height;
       }
 
       update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.pulse += this.pulseSpeed;
+        this.angle += this.driftSpeed;
+        
+        // Dynamic path swaying
+        this.currentYStart = this.yStart + Math.sin(this.angle) * 70;
+        this.currentYEnd = this.yEnd + Math.cos(this.angle) * 70;
+        this.currentCp1y = this.cp1y + Math.sin(this.angle * 1.3) * 100;
+        this.currentCp2y = this.cp2y + Math.cos(this.angle * 1.1) * 100;
 
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
+        this.pulses.forEach(pulse => {
+          pulse.progress += pulse.speed;
+          if (pulse.progress > 1) {
+            pulse.progress = 0;
+            pulse.speed = 0.0015 + Math.random() * 0.002;
+          }
+        });
+      }
+
+      getPointOnBezier(t) {
+        // Standard Cubic Bezier formula
+        const u = 1 - t;
+        const tt = t * t;
+        const uu = u * u;
+        const uuu = uu * u;
+        const ttt = tt * t;
+
+        const x = uuu * (this.direction === 1 ? 0 : width) +
+                  3 * uu * t * this.cp1x +
+                  3 * u * tt * this.cp2x +
+                  ttt * (this.direction === 1 ? width : 0);
+
+        const y = uuu * this.currentYStart +
+                  3 * uu * t * this.currentCp1y +
+                  3 * u * tt * this.currentCp2y +
+                  ttt * this.currentYEnd;
+
+        return { x, y };
       }
 
       draw() {
+        // Draw the main neural synapse pathway (thin, faint blue line)
         ctx.beginPath();
-        const brightness = 0.4 + Math.sin(this.pulse) * 0.5; // pulsing brightness
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(66, 153, 225, ${brightness})`; // Light blue (#4299e1)
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = 'rgba(66, 153, 225, 0.8)';
-        ctx.fill();
-        ctx.shadowBlur = 0; // reset
+        const startX = this.direction === 1 ? 0 : width;
+        const endX = this.direction === 1 ? width : 0;
+        ctx.moveTo(startX, this.currentYStart);
+        ctx.bezierCurveTo(this.cp1x, this.currentCp1y, this.cp2x, this.currentCp2y, endX, this.currentYEnd);
+        ctx.strokeStyle = 'rgba(66, 153, 225, 0.07)';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        // Draw the action potentials traveling along the pathway
+        this.pulses.forEach(pulse => {
+          if (pulse.progress < 0) return; // Wait for trigger
+          
+          const pos = this.getPointOnBezier(pulse.progress);
+
+          // Draw neon blue glow tail
+          const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, pulse.size * 6);
+          grad.addColorStop(0, 'rgba(255, 255, 255, 1)'); // White core
+          grad.addColorStop(0.2, 'rgba(144, 205, 244, 0.85)'); // Neon blue core
+          grad.addColorStop(0.6, 'rgba(66, 153, 225, 0.15)'); // Blue glow halo
+          grad.addColorStop(1, 'rgba(66, 153, 225, 0)');
+
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, pulse.size * 6, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
+          ctx.fill();
+
+          // Action potential core dot
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, pulse.size * 0.7, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
+        });
       }
     }
 
-    for (let i = 0; i < numNodes; i++) {
-      nodes.push(new Node());
+    const pathways = [];
+    const numPathways = 7;
+    for (let i = 0; i < numPathways; i++) {
+      pathways.push(new NeuralPathway(i));
     }
 
     function animate() {
       ctx.clearRect(0, 0, width, height);
 
-      // Update and draw nodes
-      nodes.forEach(node => {
-        node.update();
-        node.draw();
+      pathways.forEach(path => {
+        path.update();
+        path.draw();
       });
-
-      // Draw connections (synapses)
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < connectionDist) {
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            
-            // Connection opacity depends on distance and node pulse
-            const avgPulse = (nodes[i].pulse + nodes[j].pulse) / 2;
-            const pulseFactor = 0.3 + Math.sin(avgPulse) * 0.5;
-            const alpha = (1 - dist / connectionDist) * 0.25 * pulseFactor;
-            
-            ctx.strokeStyle = `rgba(66, 153, 225, ${alpha})`;
-            ctx.lineWidth = 0.9;
-            ctx.stroke();
-          }
-        }
-      }
 
       requestAnimationFrame(animate);
     }
 
-    window.addEventListener('resize', () => {
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
-    });
+    const resize = () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = heroSection.offsetHeight;
+    };
 
+    window.addEventListener('resize', resize);
+    resize();
     animate();
   }
 });
