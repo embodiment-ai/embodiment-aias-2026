@@ -195,6 +195,19 @@ a:hover { color: var(--color-primary); }
   box-shadow: 0 4px 12px rgba(229, 62, 62, 0.35);
 }
 
+.btn-secondary {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #0369a1, #075985);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.45);
+}
+
 .btn-outline {
   background: transparent;
   color: #fff;
@@ -335,6 +348,17 @@ a:hover { color: var(--color-primary); }
   color: rgba(255, 255, 255, 0.85);
   font-size: 0.95rem;
   line-height: 1.5;
+}
+
+.banner-buttons, .cta-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.cta-actions {
+  justify-content: center;
 }
 
 .banner-content .btn {
