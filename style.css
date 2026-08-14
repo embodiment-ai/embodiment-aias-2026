@@ -885,6 +885,17 @@ a:hover { color: var(--color-primary); }
   margin-top: 0.25rem;
 }
 
+.publication-opportunities-card {
+  background: linear-gradient(135deg, rgba(66, 153, 225, 0.08), rgba(26, 54, 93, 0.05));
+  border-left: 4px solid var(--color-primary-lighter);
+  padding: 1.25rem 1.5rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
 /* --- Important Dates --- */
 .dates-grid {
   display: grid;
