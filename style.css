@@ -367,103 +367,143 @@ a:hover { color: var(--color-primary); }
 }
 
 /* --- Invited Speakers Section --- */
+/* --- Invited Speakers Section (Minimalist & High-Impact) --- */
 .speakers-section {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
-  padding: 5rem 0;
+  background: radial-gradient(circle at 50% 0%, #152238 0%, #0c1424 70%, #080d1a 100%);
+  padding: 6rem 0;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.speakers-panel {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.speakers-panel-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3.5rem;
+}
+
+.speakers-eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #63b3ed;
+  margin-bottom: 0.75rem;
+}
+
+.speakers-panel-header h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.speakers-lead {
+  color: rgba(226, 232, 240, 0.85);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+.speakers-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.speaker-pillar-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 1.75rem 1.5rem;
+  transition: all 0.25s ease;
   position: relative;
   overflow: hidden;
 }
 
-.speakers-section::before {
+.speaker-pillar-card::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 30% 50%, rgba(49, 130, 206, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse at 70% 30%, rgba(229, 62, 62, 0.06) 0%, transparent 50%);
-  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(99, 179, 237, 0.5), transparent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
-.speakers-highlight {
-  position: relative;
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 3rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
-}
-
-.speakers-badge {
-  display: inline-block;
-  padding: 0.5rem 1.5rem;
-  background: linear-gradient(135deg, rgba(229, 62, 62, 0.2), rgba(221, 107, 32, 0.2));
-  border: 1px solid rgba(229, 62, 62, 0.3);
-  border-radius: 50px;
-  color: #fc8181;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-}
-
-.speakers-highlight h2 {
-  font-family: var(--font-serif);
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  color: #fff;
-  margin-bottom: 1.25rem;
-}
-
-.speakers-description {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin-bottom: 2rem;
-}
-
-.speakers-description strong {
-  color: #fff;
-}
-
-.speakers-domains {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.domain-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.2rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50px;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: var(--transition);
-}
-
-.domain-pill:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.25);
+.speaker-pillar-card:hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(99, 179, 237, 0.25);
   transform: translateY(-2px);
 }
 
-.domain-icon {
-  font-size: 1.15rem;
+.speaker-pillar-card:hover::before {
+  opacity: 1;
 }
 
-.speakers-note {
-  color: rgba(255, 255, 255, 0.5);
+.pillar-num {
+  font-family: monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #63b3ed;
+  letter-spacing: 0.08em;
+  display: inline-block;
+  margin-bottom: 0.85rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(99, 179, 237, 0.08);
+  border-radius: 4px;
+  border: 1px solid rgba(99, 179, 237, 0.15);
+}
+
+.speaker-pillar-card h4 {
+  color: #ffffff;
+  font-size: 1.08rem;
+  font-weight: 600;
+  margin-bottom: 0.55rem;
+  line-height: 1.4;
+}
+
+.speaker-pillar-card p {
+  color: rgba(203, 213, 225, 0.75);
   font-size: 0.9rem;
-  font-style: italic;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.speakers-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 50px;
+  max-width: 680px;
+  margin: 0 auto;
+  color: rgba(226, 232, 240, 0.75);
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+.status-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #63b3ed;
+  box-shadow: 0 0 8px #63b3ed;
+  flex-shrink: 0;
 }
 
 /* --- Section Utilities --- */
