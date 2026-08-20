@@ -694,42 +694,71 @@ a:hover { color: var(--color-primary); }
   line-height: 1.4;
 }
 
-/* --- Objectives --- */
+/* --- Objectives (Minimalist & Architectural) --- */
 .objectives-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.75rem;
+  gap: 1.5rem;
 }
 
 .objective-card {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 12px;
-  padding: 2rem;
-  transition: var(--transition);
+  border-radius: 10px;
+  padding: 2.25rem 1.85rem;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.objective-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary-lighter), transparent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
 .objective-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border-color: rgba(49, 130, 206, 0.3);
 }
 
-.objective-icon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+.objective-card:hover::before {
+  opacity: 1;
+}
+
+.objective-index {
+  font-family: monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary-lighter);
+  letter-spacing: 0.1em;
+  margin-bottom: 1.25rem;
+  display: inline-block;
 }
 
 .objective-card h3 {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--color-primary);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
   font-weight: 600;
+  line-height: 1.35;
 }
 
 .objective-card p {
   font-size: 0.92rem;
   color: var(--color-text-light);
-  line-height: 1.6;
+  line-height: 1.65;
+  margin: 0;
+  flex-grow: 1;
 }
 
 /* --- Topics --- */
