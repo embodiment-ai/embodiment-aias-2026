@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://embodiment-ai.github.io/embodiment-aias-2026/sitemap.xml
