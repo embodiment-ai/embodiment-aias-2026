@@ -1448,7 +1448,15 @@ a:hover { color: var(--color-primary); }
 }
 
 .about-main p {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--color-text);
   margin-bottom: 1.25rem;
+}
+
+.about-main p:last-child {
+  margin-bottom: 0;
 }
 
 .info-card {
