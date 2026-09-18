@@ -159,7 +159,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=5.1">
+  <link rel="stylesheet" href="style.css?v=5.2">
 </head>
 <body>
 
@@ -172,7 +172,7 @@
       </button>
       <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#speakers">Speakers</a></li>
+        <li><a href="speakers.html">Speakers</a></li>
         <li><a href="#topics">Topics</a></li>
         <li><a href="#schedule">Schedule</a></li>
         <li><a href="#roadmap">Roadmap</a></li>
@@ -234,7 +234,9 @@
         <!-- Keynote Speaker Spotlight Card -->
         <div class="keynote-card">
           <div class="keynote-avatar-wrapper">
-            <img src="images/speakers/antonio_damasio.webp" alt="Dr. Antonio Damasio" class="keynote-avatar">
+            <a href="https://dornsife.usc.edu/bci/people/antonio-damasio/" target="_blank" rel="noopener" title="Visit Dr. Antonio Damasio's Profile">
+              <img src="images/speakers/antonio_damasio.webp" alt="Dr. Antonio Damasio" class="keynote-avatar">
+            </a>
             <span class="keynote-badge">★ Distinguished Keynote</span>
           </div>
           <div class="keynote-info">
@@ -242,68 +244,199 @@
               <span class="speaker-role-tag">Distinguished Keynote Speaker</span>
               <span class="speaker-inst-tag">USC</span>
             </div>
-            <h3>Dr. Antonio Damasio</h3>
+            <h3><a href="https://dornsife.usc.edu/bci/people/antonio-damasio/" target="_blank" rel="noopener" style="color: #fff;">Dr. Antonio Damasio</a></h3>
             <p class="keynote-title">Director, Brain and Creativity Institute</p>
             <p class="keynote-affil">David Dornsife Chair in Neuroscience, Professor of Psychology, Philosophy, and Neurology &middot; University of Southern California (USC)</p>
             <p class="keynote-bio">World-renowned neuroscientist and author whose seminal research uncovered the neural substrates of emotion, feelings, decision-making, and consciousness. Pioneer of the somatic marker hypothesis and foundational works on homeostasis in cognitive architecture.</p>
+            <div class="speaker-links" style="margin-top: 1rem;">
+              <a href="https://dornsife.usc.edu/bci/people/antonio-damasio/" target="_blank" rel="noopener" class="profile-btn">🌐 Faculty Website →</a>
+            </div>
           </div>
         </div>
 
-        <!-- Invited Speakers Grid -->
-        <div class="invited-speakers-grid">
-          
-          <div class="speaker-card">
-            <div class="speaker-avatar-wrap">
-              <img src="images/speakers/radu_soricut.png" alt="Dr. Radu Soricut">
-            </div>
-            <div class="speaker-card-body">
-              <span class="speaker-tag">Invited Speaker</span>
-              <h4>Dr. Radu Soricut</h4>
-              <p class="speaker-role">Distinguished Research Scientist</p>
-              <p class="speaker-affil">Google DeepMind</p>
-              <p class="speaker-desc">Pioneering research leader in multimodal foundation models, situated AI, vision-language integration, and embodied machine intelligence.</p>
-            </div>
+        <!-- Rotating Speakers Reel Header -->
+        <div class="reel-header">
+          <div class="reel-title-group">
+            <span class="reel-indicator-dot"></span>
+            <h3>Invited Speakers &amp; Facilitators</h3>
           </div>
-
-          <div class="speaker-card">
-            <div class="speaker-avatar-wrap">
-              <img src="images/speakers/leonardo_christov_moore.webp" alt="Dr. Leonardo Christov-Moore">
-            </div>
-            <div class="speaker-card-body">
-              <span class="speaker-tag">Invited Speaker</span>
-              <h4>Dr. Leonardo Christov-Moore</h4>
-              <p class="speaker-role">Senior Research Scientist &amp; Neuroscientist</p>
-              <p class="speaker-affil">Institute for Advanced Consciousness Studies (IACS)</p>
-              <p class="speaker-desc">Leading investigator examining the neural basis of empathy, altruism, interoceptive awareness, and relational AI alignment.</p>
-            </div>
+          <div class="reel-controls">
+            <button class="reel-arrow-btn prev-btn" id="reelPrevBtn" aria-label="Scroll left">←</button>
+            <button class="reel-arrow-btn next-btn" id="reelNextBtn" aria-label="Scroll right">→</button>
           </div>
+        </div>
 
-          <div class="speaker-card">
-            <div class="speaker-avatar-wrap">
-              <img src="images/speakers/vittorio_gallese.png" alt="Dr. Vittorio Gallese">
+        <!-- Rotating Carousel Reel (Continuous Seamless Glide, Pauses on Hover) -->
+        <div class="speakers-carousel-container" id="speakersReelContainer">
+          <div class="speakers-carousel-track" id="speakersTrack">
+            
+            <!-- Radu Soricut -->
+            <div class="reel-card">
+              <a href="http://www.radusoricut.com/" target="_blank" rel="noopener" class="reel-photo-wrap" title="Visit Dr. Radu Soricut's Website">
+                <img src="images/speakers/radu_soricut.png" alt="Dr. Radu Soricut">
+                <span class="reel-inst-badge">DeepMind</span>
+              </a>
+              <div class="reel-card-body">
+                <h4><a href="http://www.radusoricut.com/" target="_blank" rel="noopener">Dr. Radu Soricut</a></h4>
+                <p class="reel-role">Distinguished Research Scientist</p>
+                <p class="reel-affil">Google DeepMind</p>
+                <div class="reel-actions">
+                  <a href="http://www.radusoricut.com/" target="_blank" rel="noopener" class="icon-link" title="Personal Website">🌐</a>
+                  <a href="https://www.linkedin.com/in/radusoricut/" target="_blank" rel="noopener" class="linkedin-link" title="LinkedIn Profile">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z"/></svg>
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
+              </div>
             </div>
-            <div class="speaker-card-body">
-              <span class="speaker-tag">Invited Speaker</span>
-              <h4>Dr. Vittorio Gallese</h4>
-              <p class="speaker-role">Professor of Cognitive Neuroscience</p>
-              <p class="speaker-affil">University of Parma, Italy</p>
-              <p class="speaker-desc">World-renowned cognitive neuroscientist, co-discoverer of mirror neurons, and pioneer in embodied simulation theory across language and action.</p>
+
+            <!-- Leonardo Christov-Moore -->
+            <div class="reel-card">
+              <a href="https://advancedconsciousness.org/" target="_blank" rel="noopener" class="reel-photo-wrap" title="Visit Dr. Leonardo Christov-Moore's Profile">
+                <img src="images/speakers/leonardo_christov_moore.webp" alt="Dr. Leonardo Christov-Moore">
+                <span class="reel-inst-badge">IACS</span>
+              </a>
+              <div class="reel-card-body">
+                <h4><a href="https://advancedconsciousness.org/" target="_blank" rel="noopener">Dr. Leonardo Christov-Moore</a></h4>
+                <p class="reel-role">Senior Research Scientist</p>
+                <p class="reel-affil">Inst. for Advanced Consciousness</p>
+                <div class="reel-actions">
+                  <a href="https://advancedconsciousness.org/" target="_blank" rel="noopener" class="icon-link" title="Profile">🌐</a>
+                  <a href="https://www.linkedin.com/in/leonardo-christov-moore-0a6aab3a" target="_blank" rel="noopener" class="linkedin-link" title="LinkedIn Profile">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z"/></svg>
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
+              </div>
             </div>
+
+            <!-- Vittorio Gallese -->
+            <div class="reel-card">
+              <a href="https://personale.unipr.it/en/ugovfiles/persone/20421" target="_blank" rel="noopener" class="reel-photo-wrap" title="Visit Dr. Vittorio Gallese's Website">
+                <img src="images/speakers/vittorio_gallese.png" alt="Dr. Vittorio Gallese">
+                <span class="reel-inst-badge">Univ. Parma</span>
+              </a>
+              <div class="reel-card-body">
+                <h4><a href="https://personale.unipr.it/en/ugovfiles/persone/20421" target="_blank" rel="noopener">Dr. Vittorio Gallese</a></h4>
+                <p class="reel-role">Professor of Cognitive Neuroscience</p>
+                <p class="reel-affil">University of Parma, Italy</p>
+                <div class="reel-actions">
+                  <a href="https://personale.unipr.it/en/ugovfiles/persone/20421" target="_blank" rel="noopener" class="icon-link" title="Website">🌐</a>
+                  <a href="https://it.linkedin.com/in/vittorio-gallese-32a56835" target="_blank" rel="noopener" class="linkedin-link" title="LinkedIn Profile">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z"/></svg>
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sahib Khalsa -->
+            <div class="reel-card">
+              <a href="https://www.laureateinstitute.org/sahib-khalsa.html" target="_blank" rel="noopener" class="reel-photo-wrap" title="Visit Dr. Sahib Khalsa's Profile">
+                <img src="images/speakers/sahib_khalsa.jpg" alt="Dr. Sahib Khalsa">
+                <span class="reel-inst-badge">LIBR / UCLA</span>
+              </a>
+              <div class="reel-card-body">
+                <h4><a href="https://www.laureateinstitute.org/sahib-khalsa.html" target="_blank" rel="noopener">Dr. Sahib Khalsa</a></h4>
+                <p class="reel-role">Associate Professor &amp; Psychiatrist</p>
+                <p class="reel-affil">Laureate Institute / UCLA</p>
+                <div class="reel-actions">
+                  <a href="https://www.laureateinstitute.org/sahib-khalsa.html" target="_blank" rel="noopener" class="icon-link" title="Profile">🌐</a>
+                  <a href="https://www.linkedin.com/in/sahib-khalsa-22969a191" target="_blank" rel="noopener" class="linkedin-link" title="LinkedIn Profile">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z"/></svg>
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Akila Kadambi -->
+            <div class="reel-card">
+              <a href="mailto:akadambi@google.com" class="reel-photo-wrap" title="Contact Akila Kadambi">
+                <img src="https://media.licdn.com/dms/image/v2/D4E03AQGKJE0cPlb5GA/profile-displayphoto-shrink_200_200/B4EZdp.P2FH0Ao-/0/1749829615843?e=2147483647&v=beta&t=53GXiMmDNbYp2mtJJ9GHmwRdHKUEvy_XapJOetQ0drk" alt="Akila Kadambi">
+                <span class="reel-inst-badge">DeepMind / UCLA</span>
+              </a>
+              <div class="reel-card-body">
+                <h4><a href="mailto:akadambi@google.com">Akila Kadambi</a></h4>
+                <p class="reel-role">Organizer &amp; Facilitator</p>
+                <p class="reel-affil">Google DeepMind / UCLA / USC</p>
+                <div class="reel-actions">
+                  <a href="mailto:akadambi@google.com" class="icon-link" title="Email">✉️</a>
+                  <a href="https://www.linkedin.com/in/akila-kadambi-99802b36b" target="_blank" rel="noopener" class="linkedin-link" title="LinkedIn Profile">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z"/></svg>
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Marco Iacoboni -->
+            <div class="reel-card">
+              <a href="https://www.semel.ucla.edu/profile/marco-iacoboni-md-phd" target="_blank" rel="noopener" class="reel-photo-wrap" title="Visit Dr. Marco Iacoboni's Profile">
+                <img src="https://lh5.googleusercontent.com/proxy/P17HEvdRZKyysFfC4oo26mtkE3UmAN1guV0gRh0kQAZQkSKcTrB-bBfIhehgUSmA1J7dEso5rh7Qbx4INkZLhRTtC1-EE9Ys5A" alt="Dr. Marco Iacoboni">
+                <span class="reel-inst-badge">UCLA</span>
+              </a>
+              <div class="reel-card-body">
+                <h4><a href="https://www.semel.ucla.edu/profile/marco-iacoboni-md-phd" target="_blank" rel="noopener">Dr. Marco Iacoboni</a></h4>
+                <p class="reel-role">Speaker &amp; Facilitator</p>
+                <p class="reel-affil">UCLA Brain Research Institute</p>
+                <div class="reel-actions">
+                  <a href="https://www.semel.ucla.edu/profile/marco-iacoboni-md-phd" target="_blank" rel="noopener" class="icon-link" title="Faculty Profile">🌐</a>
+                  <a href="https://www.linkedin.com/in/marco-iacoboni-57482146" target="_blank" rel="noopener" class="linkedin-link" title="LinkedIn Profile">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z"/></svg>
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lisa Aziz-Zadeh -->
+            <div class="reel-card">
+              <a href="https://dornsife.usc.edu/bci/people/lisa-aziz-zadeh/" target="_blank" rel="noopener" class="reel-photo-wrap" title="Visit Dr. Lisa Aziz-Zadeh's Profile">
+                <img src="https://ngp.usc.edu/wp-content/uploads/2025/06/Lisa_Aziz_Z_Approved-1920x1080-1-1024x576.webp" alt="Dr. Lisa Aziz-Zadeh">
+                <span class="reel-inst-badge">USC</span>
+              </a>
+              <div class="reel-card-body">
+                <h4><a href="https://dornsife.usc.edu/bci/people/lisa-aziz-zadeh/" target="_blank" rel="noopener">Dr. Lisa Aziz-Zadeh</a></h4>
+                <p class="reel-role">Speaker &amp; Facilitator</p>
+                <p class="reel-affil">USC Brain &amp; Creativity Institute</p>
+                <div class="reel-actions">
+                  <a href="https://dornsife.usc.edu/bci/people/lisa-aziz-zadeh/" target="_blank" rel="noopener" class="icon-link" title="Faculty Profile">🌐</a>
+                  <a href="https://www.linkedin.com/in/lisa-aziz-zadeh-309489390" target="_blank" rel="noopener" class="linkedin-link" title="LinkedIn Profile">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z"/></svg>
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Srini Narayanan -->
+            <div class="reel-card">
+              <a href="https://research.google/people/srini-narayanan/" target="_blank" rel="noopener" class="reel-photo-wrap" title="Visit Dr. Srini Narayanan's Profile">
+                <img src="https://media.licdn.com/dms/image/v2/C4D03AQEPLip9XE7TRw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1624117590517?e=2147483647&v=beta&t=GWqGQiySjYw0Bo7xXYBFsJPDoOQsb52C69usJxLLs2M" alt="Dr. Srini Narayanan">
+                <span class="reel-inst-badge">DeepMind</span>
+              </a>
+              <div class="reel-card-body">
+                <h4><a href="https://research.google/people/srini-narayanan/" target="_blank" rel="noopener">Dr. Srini Narayanan</a></h4>
+                <p class="reel-role">Speaker &amp; Facilitator</p>
+                <p class="reel-affil">Google DeepMind, Zurich</p>
+                <div class="reel-actions">
+                  <a href="https://research.google/people/srini-narayanan/" target="_blank" rel="noopener" class="icon-link" title="Research Profile">🌐</a>
+                  <a href="https://ch.linkedin.com/in/srini-narayanan-6350258a" target="_blank" rel="noopener" class="linkedin-link" title="LinkedIn Profile">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z"/></svg>
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
           </div>
+        </div>
 
-          <div class="speaker-card">
-            <div class="speaker-avatar-wrap">
-              <img src="images/speakers/sahib_khalsa.jpg" alt="Dr. Sahib Khalsa">
-            </div>
-            <div class="speaker-card-body">
-              <span class="speaker-tag">Invited Speaker</span>
-              <h4>Dr. Sahib Khalsa</h4>
-              <p class="speaker-role">Associate Professor &amp; Psychiatrist</p>
-              <p class="speaker-affil">Laureate Institute for Brain Research / UCLA</p>
-              <p class="speaker-desc">Leading neuroscientist and clinician pioneering human interoception, body-brain communication, and visceral neural pathways.</p>
-            </div>
-          </div>
-
+        <div style="text-align: center; margin-top: 1.5rem;">
+          <a href="speakers.html" class="btn btn-secondary btn-lg">
+            Explore Full Speaker Directory &amp; Bios →
+          </a>
         </div>
 
       </div>
@@ -630,41 +763,72 @@
       </div>
       <div class="organizers-grid">
         <div class="organizer-card">
-          <div class="organizer-avatar"><img src="https://media.licdn.com/dms/image/v2/D4E03AQGKJE0cPlb5GA/profile-displayphoto-shrink_200_200/B4EZdp.P2FH0Ao-/0/1749829615843?e=2147483647&v=beta&t=53GXiMmDNbYp2mtJJ9GHmwRdHKUEvy_XapJOetQ0drk" alt="Akila Kadambi"></div>
-          <h3>Akila Kadambi</h3>
+          <a href="mailto:akadambi@google.com" class="organizer-avatar" title="Contact Akila Kadambi">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQGKJE0cPlb5GA/profile-displayphoto-shrink_200_200/B4EZdp.P2FH0Ao-/0/1749829615843?e=2147483647&v=beta&t=53GXiMmDNbYp2mtJJ9GHmwRdHKUEvy_XapJOetQ0drk" alt="Akila Kadambi">
+          </a>
+          <h3><a href="mailto:akadambi@google.com">Akila Kadambi</a></h3>
           <p class="organizer-role">Organizer &amp; Facilitator</p>
           <p class="organizer-role-secondary">Workshop Contact</p>
           <p class="organizer-affiliation">Google DeepMind</p>
           <p class="organizer-affiliation-secondary">UCLA / USC, USA</p>
           <p class="organizer-bio">Neuroscientist focusing on the intersection of humanistic and embodied neuroscience, and artificial intelligence architectures.</p>
-          <a href="mailto:akadambi@google.com" class="organizer-email">akadambi@google.com</a>
+          <div class="organizer-footer-links">
+            <a href="mailto:akadambi@google.com" class="organizer-email">akadambi@google.com</a>
+            <a href="https://www.linkedin.com/in/akila-kadambi-99802b36b" target="_blank" rel="noopener" class="linkedin-icon-btn" title="LinkedIn Profile">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z"/></svg>
+            </a>
+          </div>
         </div>
+
         <div class="organizer-card">
-          <div class="organizer-avatar"><img src="https://lh5.googleusercontent.com/proxy/P17HEvdRZKyysFfC4oo26mtkE3UmAN1guV0gRh0kQAZQkSKcTrB-bBfIhehgUSmA1J7dEso5rh7Qbx4INkZLhRTtC1-EE9Ys5A" alt="Marco Iacoboni"></div>
-          <h3>Marco Iacoboni</h3>
+          <a href="https://www.semel.ucla.edu/profile/marco-iacoboni-md-phd" target="_blank" rel="noopener" class="organizer-avatar" title="Visit Dr. Marco Iacoboni's Faculty Profile">
+            <img src="https://lh5.googleusercontent.com/proxy/P17HEvdRZKyysFfC4oo26mtkE3UmAN1guV0gRh0kQAZQkSKcTrB-bBfIhehgUSmA1J7dEso5rh7Qbx4INkZLhRTtC1-EE9Ys5A" alt="Marco Iacoboni">
+          </a>
+          <h3><a href="https://www.semel.ucla.edu/profile/marco-iacoboni-md-phd" target="_blank" rel="noopener">Marco Iacoboni</a></h3>
           <p class="organizer-role">Speaker &amp; Facilitator</p>
           <p class="organizer-affiliation">UCLA Brain Research Institute</p>
           <p class="organizer-affiliation-secondary">Semel Institute, USA</p>
           <p class="organizer-bio">Globally recognized expert in the mirror neuron system, action processing, and empathy.</p>
-          <a href="mailto:iacoboni@ucla.edu" class="organizer-email">iacoboni@ucla.edu</a>
+          <div class="organizer-footer-links">
+            <a href="mailto:iacoboni@ucla.edu" class="organizer-email">iacoboni@ucla.edu</a>
+            <a href="https://www.linkedin.com/in/marco-iacoboni-57482146" target="_blank" rel="noopener" class="linkedin-icon-btn" title="LinkedIn Profile">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z"/></svg>
+            </a>
+          </div>
         </div>
+
         <div class="organizer-card">
-          <div class="organizer-avatar"><img src="https://ngp.usc.edu/wp-content/uploads/2025/06/Lisa_Aziz_Z_Approved-1920x1080-1-1024x576.webp" alt="Lisa Aziz-Zadeh"></div>
-          <h3>Lisa Aziz-Zadeh</h3>
+          <a href="https://dornsife.usc.edu/bci/people/lisa-aziz-zadeh/" target="_blank" rel="noopener" class="organizer-avatar" title="Visit Dr. Lisa Aziz-Zadeh's Faculty Profile">
+            <img src="https://ngp.usc.edu/wp-content/uploads/2025/06/Lisa_Aziz_Z_Approved-1920x1080-1-1024x576.webp" alt="Lisa Aziz-Zadeh">
+          </a>
+          <h3><a href="https://dornsife.usc.edu/bci/people/lisa-aziz-zadeh/" target="_blank" rel="noopener">Lisa Aziz-Zadeh</a></h3>
           <p class="organizer-role">Speaker &amp; Facilitator</p>
           <p class="organizer-affiliation">USC Brain and Creativity Institute</p>
           <p class="organizer-affiliation-secondary">USA</p>
           <p class="organizer-bio">Leading expert in the cognitive neuroscience of embodiment, action observation, and how the brain processes social cognition and language.</p>
-          <a href="mailto:lazizzad@usc.edu" class="organizer-email">lazizzad@usc.edu</a>
+          <div class="organizer-footer-links">
+            <a href="mailto:lazizzad@usc.edu" class="organizer-email">lazizzad@usc.edu</a>
+            <a href="https://www.linkedin.com/in/lisa-aziz-zadeh-309489390" target="_blank" rel="noopener" class="linkedin-icon-btn" title="LinkedIn Profile">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z"/></svg>
+            </a>
+          </div>
         </div>
+
         <div class="organizer-card">
-          <div class="organizer-avatar"><img src="https://media.licdn.com/dms/image/v2/C4D03AQEPLip9XE7TRw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1624117590517?e=2147483647&v=beta&t=GWqGQiySjYw0Bo7xXYBFsJPDoOQsb52C69usJxLLs2M" alt="Srini Narayanan"></div>
-          <h3>Srini Narayanan</h3>
+          <a href="https://research.google/people/srini-narayanan/" target="_blank" rel="noopener" class="organizer-avatar" title="Visit Dr. Srini Narayanan's Research Profile">
+            <img src="https://media.licdn.com/dms/image/v2/C4D03AQEPLip9XE7TRw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1624117590517?e=2147483647&v=beta&t=GWqGQiySjYw0Bo7xXYBFsJPDoOQsb52C69usJxLLs2M" alt="Srini Narayanan">
+          </a>
+          <h3><a href="https://research.google/people/srini-narayanan/" target="_blank" rel="noopener">Srini Narayanan</a></h3>
           <p class="organizer-role">Speaker &amp; Facilitator</p>
           <p class="organizer-affiliation">Google DeepMind, Zurich</p>
           <p class="organizer-affiliation-secondary">Switzerland</p>
           <p class="organizer-bio">Distinguished research scientist (Senior Director) who has pioneered work at the intersection of neural theories of language, embodied meaning, and next-generation AI architectures.</p>
-          <a href="mailto:srinin@google.com" class="organizer-email">srinin@google.com</a>
+          <div class="organizer-footer-links">
+            <a href="mailto:srinin@google.com" class="organizer-email">srinin@google.com</a>
+            <a href="https://ch.linkedin.com/in/srini-narayanan-6350258a" target="_blank" rel="noopener" class="linkedin-icon-btn" title="LinkedIn Profile">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64s.73 1.64 1.64 1.64 1.64-.73 1.64-1.64-.73-1.64-1.64-1.64Z"/></svg>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -747,6 +911,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=5.1"></script>
+  <script src="script.js?v=5.2"></script>
 </body>
 </html>
