@@ -381,4 +381,112 @@ document.addEventListener('DOMContentLoaded', () => {
     resize();
     animate();
   }
+
+  // --- AIAS+ 2026 Main Conference Speakers Rotating Carousel ---
+  const aiasReelContainer = document.getElementById('aiasSpeakersReelContainer');
+  const aiasSpeakersTrack = document.getElementById('aiasSpeakersTrack');
+  const aiasReelPrevBtn = document.getElementById('aiasReelPrevBtn');
+  const aiasReelNextBtn = document.getElementById('aiasReelNextBtn');
+
+  if (aiasReelContainer && aiasSpeakersTrack) {
+    // Clone cards once for infinite continuous scroll loop
+    const originalCards = Array.from(aiasSpeakersTrack.children);
+    originalCards.forEach(card => {
+      const clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      aiasSpeakersTrack.appendChild(clone);
+    });
+
+    let isPaused = false;
+    let isDragging = false;
+    let startX = 0;
+    let scrollStart = 0;
+    const scrollSpeed = 0.65; // Smooth cinematic glide speed
+
+    function autoScrollReel() {
+      if (!isPaused && !isDragging) {
+        aiasReelContainer.scrollLeft += scrollSpeed;
+        const halfWidth = aiasSpeakersTrack.scrollWidth / 2;
+        if (aiasReelContainer.scrollLeft >= halfWidth) {
+          aiasReelContainer.scrollLeft -= halfWidth;
+        }
+      }
+      requestAnimationFrame(autoScrollReel);
+    }
+
+    requestAnimationFrame(autoScrollReel);
+
+    // Pause on hover
+    aiasReelContainer.addEventListener('mouseenter', () => { isPaused = true; });
+    aiasReelContainer.addEventListener('mouseleave', () => { isPaused = false; });
+
+    // Drag-to-scroll (Mouse)
+    aiasReelContainer.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      isPaused = true;
+      startX = e.pageX - aiasReelContainer.offsetLeft;
+      scrollStart = aiasReelContainer.scrollLeft;
+      aiasReelContainer.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        aiasReelContainer.style.cursor = 'grab';
+        setTimeout(() => { isPaused = false; }, 800);
+      }
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - aiasReelContainer.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      aiasReelContainer.scrollLeft = scrollStart - walk;
+      
+      const halfWidth = aiasSpeakersTrack.scrollWidth / 2;
+      if (aiasReelContainer.scrollLeft >= halfWidth) {
+        aiasReelContainer.scrollLeft -= halfWidth;
+        scrollStart -= halfWidth;
+      } else if (aiasReelContainer.scrollLeft <= 0) {
+        aiasReelContainer.scrollLeft += halfWidth;
+        scrollStart += halfWidth;
+      }
+    });
+
+    // Touch support for mobile
+    aiasReelContainer.addEventListener('touchstart', () => {
+      isPaused = true;
+    }, { passive: true });
+
+    aiasReelContainer.addEventListener('touchend', () => {
+      setTimeout(() => { isPaused = false; }, 1200);
+    }, { passive: true });
+
+    // Arrow controls
+    const scrollStep = 280;
+    if (aiasReelPrevBtn) {
+      aiasReelPrevBtn.addEventListener('click', () => {
+        isPaused = true;
+        const halfWidth = aiasSpeakersTrack.scrollWidth / 2;
+        if (aiasReelContainer.scrollLeft <= 50) {
+          aiasReelContainer.scrollLeft += halfWidth;
+        }
+        aiasReelContainer.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+        setTimeout(() => { isPaused = false; }, 1500);
+      });
+    }
+
+    if (aiasReelNextBtn) {
+      aiasReelNextBtn.addEventListener('click', () => {
+        isPaused = true;
+        const halfWidth = aiasSpeakersTrack.scrollWidth / 2;
+        if (aiasReelContainer.scrollLeft >= halfWidth - 50) {
+          aiasReelContainer.scrollLeft -= halfWidth;
+        }
+        aiasReelContainer.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        setTimeout(() => { isPaused = false; }, 1500);
+      });
+    }
+  }
 });

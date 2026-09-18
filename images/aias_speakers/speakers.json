@@ -1,0 +1,104 @@
+[
+  {
+    "name": "Yejin Choi",
+    "affil": "Dieter Schwarz Foundation HAI Professor, Professor of Computer Science, Senior Fellow\\nStanford HAI",
+    "slug": "yejin-choi",
+    "image": "images/aias_speakers/yejin-choi.png"
+  },
+  {
+    "name": "Le Cong",
+    "affil": "Associate Professor of Pathology (Pathology Research) and of Genetics\\nStanford University",
+    "slug": "le-cong",
+    "image": "images/aias_speakers/le-cong.png"
+  },
+  {
+    "name": "Karl Deisseroth",
+    "affil": "Chen Professor, Professor of Bioengineering and of Psychiatry and Behavioral Sciences, Stanford University",
+    "slug": "karl-deisseroth",
+    "image": "images/aias_speakers/karl-deisseroth.png"
+  },
+  {
+    "name": "Ying Diao",
+    "affil": "Professor, Departments of Chemical and Biomolecular Engineering, Chemistry, Materials Science and Engineering\\nThrust leader, Molecule Maker Lab Institute \\nUniversity of Illinois at Urbana-Champaign",
+    "slug": "ying-diao",
+    "image": "images/aias_speakers/ying-diao.png"
+  },
+  {
+    "name": "Simon Du",
+    "affil": "Associate Professor, Paul G. Allen School of Computer Science & Engineering, University of Washington. Chief Scientist for Reasoning Models, Apodex",
+    "slug": "simon-du",
+    "image": "images/aias_speakers/simon-du.png"
+  },
+  {
+    "name": "Kafui Dzirasa",
+    "affil": "Eugene and Marie Washington Presidential Distinguished Professor, Duke University",
+    "slug": "kafui-dzirasa",
+    "image": "images/aias_speakers/kafui-dzirasa.png"
+  },
+  {
+    "name": "Heng Ji",
+    "affil": "Professor\\nUniversity of Illinois Urbana-Champaign",
+    "slug": "heng-ji",
+    "image": "images/aias_speakers/heng-ji.png"
+  },
+  {
+    "name": "Christina Kim",
+    "affil": "Assistant Professor in the Omenn-Darling Bioengineering Institute, Princeton University",
+    "slug": "christina-kim",
+    "image": "images/aias_speakers/christina-kim.png"
+  },
+  {
+    "name": "Sam Rodriques",
+    "affil": "Director, CEO\\nFutureHouse",
+    "slug": "sam-rodriques",
+    "image": "images/aias_speakers/sam-rodriques.png"
+  },
+  {
+    "name": "Shannon Wiltsey Stirman",
+    "affil": "Professor of Psychiatry and Behavioral Sciences (Public Mental Health and Population Sciences)\\nStanford University",
+    "slug": "shannon-wiltsey-stirman",
+    "image": "images/aias_speakers/shannon-wiltsey-stirman.png"
+  },
+  {
+    "name": "Terence Tao",
+    "affil": "Professor of Mathematics, Director of Special Projects\\nUCLA, IPAM",
+    "slug": "terence-tao",
+    "image": "images/aias_speakers/terence-tao.png"
+  },
+  {
+    "name": "Maxim Topaz",
+    "affil": "Elizabeth Standish Gill Associate Professor of Nursing\\nColumbia University",
+    "slug": "maxim-topaz",
+    "image": "images/aias_speakers/maxim-topaz.png"
+  },
+  {
+    "name": "Jeffrey Ullman",
+    "affil": "SW Ascherman Prof. of Engineering (emeritus), Department of Computer Science, \\nStanford University",
+    "slug": "jeffrey-ullman",
+    "image": "images/aias_speakers/jeffrey-ullman.png"
+  },
+  {
+    "name": "Kyunghyun Cho",
+    "affil": "Glen de Vries Professor of Health Statistics\\nProfessor at CILVR Group, Computer Science (Courant Institute) and Center for Data Science\\nCo-Director of Global Frontier AI Lab \\nNew York University",
+    "slug": "kyunghyun-cho",
+    "image": "images/aias_speakers/kyunghyun-cho.png"
+  },
+  {
+    "name": "Toby Walsh",
+    "affil": "Laureate Fellow, Scientia Professor of Artificial Intelligence\\nUniversity of New South Wales",
+    "slug": "toby-walsh",
+    "image": "images/aias_speakers/toby-walsh.png"
+  },
+  {
+    "name": "Rebecca Willett",
+    "affil": "Worah Family Professor in the Wallman Society of Fellows, Computer Science, Statistics, and the CollegeFaculty Director of AI, Data Science Institute\\nUniversity of Chicago",
+    "slug": "rebecca-willett",
+    "image": "images/aias_speakers/rebecca-willett.png"
+  },
+  {
+    "name": "James Zou",
+    "affil": "Associate Professor of Biomedical Data Science and, by courtesy, of Computer Science and of Electrical Engineering\\nStanford University",
+    "slug": "james-zou",
+    "image": "images/aias_speakers/james-zou.png"
+  }
+]
