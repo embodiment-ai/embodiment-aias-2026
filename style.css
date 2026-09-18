@@ -572,8 +572,8 @@ a:hover { color: var(--color-primary); }
 .keynote-avatar-wrapper {
   position: relative;
   flex-shrink: 0;
-  width: 165px;
-  height: 165px;
+  width: 200px;
+  height: 200px;
 }
 
 .keynote-avatar {
@@ -1218,8 +1218,10 @@ a:hover { color: var(--color-primary); }
 }
 
 .speaker-avatar-wrap {
-  width: 165px;
-  height: 165px;
+  width: 100%;
+  max-width: 215px;
+  aspect-ratio: 1 / 1;
+  height: auto;
   border-radius: 16px;
   overflow: hidden;
   position: relative;
