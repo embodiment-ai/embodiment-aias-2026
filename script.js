@@ -420,13 +420,15 @@ document.addEventListener('DOMContentLoaded', () => {
     aiasReelContainer.addEventListener('mouseenter', () => { isPaused = true; });
     aiasReelContainer.addEventListener('mouseleave', () => { isPaused = false; });
 
+    let hasMoved = false;
+
     // Drag-to-scroll (Mouse)
     aiasReelContainer.addEventListener('mousedown', (e) => {
       isDragging = true;
+      hasMoved = false;
       isPaused = true;
       startX = e.pageX - aiasReelContainer.offsetLeft;
       scrollStart = aiasReelContainer.scrollLeft;
-      aiasReelContainer.style.cursor = 'grabbing';
     });
 
     window.addEventListener('mouseup', () => {
@@ -439,20 +441,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
-      e.preventDefault();
       const x = e.pageX - aiasReelContainer.offsetLeft;
-      const walk = (x - startX) * 1.5;
-      aiasReelContainer.scrollLeft = scrollStart - walk;
-      
-      const halfWidth = aiasSpeakersTrack.scrollWidth / 2;
-      if (aiasReelContainer.scrollLeft >= halfWidth) {
-        aiasReelContainer.scrollLeft -= halfWidth;
-        scrollStart -= halfWidth;
-      } else if (aiasReelContainer.scrollLeft <= 0) {
-        aiasReelContainer.scrollLeft += halfWidth;
-        scrollStart += halfWidth;
+      const diff = Math.abs(x - startX);
+      if (diff > 4) {
+        hasMoved = true;
+        aiasReelContainer.style.cursor = 'grabbing';
+        e.preventDefault();
+        const walk = (x - startX) * 1.35;
+        aiasReelContainer.scrollLeft = scrollStart - walk;
+        
+        const halfWidth = aiasSpeakersTrack.scrollWidth / 2;
+        if (aiasReelContainer.scrollLeft >= halfWidth) {
+          aiasReelContainer.scrollLeft -= halfWidth;
+          scrollStart -= halfWidth;
+        } else if (aiasReelContainer.scrollLeft <= 0) {
+          aiasReelContainer.scrollLeft += halfWidth;
+          scrollStart += halfWidth;
+        }
       }
     });
+
+    // Prevent link click only if user actually dragged the carousel
+    aiasReelContainer.addEventListener('click', (e) => {
+      if (hasMoved) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
 
     // Touch support for mobile
     aiasReelContainer.addEventListener('touchstart', () => {
