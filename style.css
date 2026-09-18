@@ -886,16 +886,22 @@ a:hover { color: var(--color-primary); }
   position: absolute;
   bottom: 8px;
   right: 8px;
-  background: rgba(11, 20, 38, 0.88);
+  background: rgba(11, 20, 38, 0.92);
   backdrop-filter: blur(8px);
-  color: #93c5fd;
+  color: #bfdbfe;
   font-family: var(--font-mono);
   font-size: 0.65rem;
   font-weight: 600;
   padding: 0.2rem 0.55rem;
   border-radius: 6px;
-  border: 1px solid rgba(147, 197, 253, 0.25);
+  border: 1px solid rgba(147, 197, 253, 0.35);
   letter-spacing: 0.04em;
+  max-width: 85%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .reel-card-body {
