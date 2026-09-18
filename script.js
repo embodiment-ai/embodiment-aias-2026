@@ -504,4 +504,306 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
+
+  // --- AIAS+ Speaker Profile Modal / Drawer Controller ---
+  const speakerModalBackdrop = document.getElementById("speakerModalBackdrop");
+  const speakerModalCloseBtn = document.getElementById("speakerModalCloseBtn");
+  const speakerModalPhoto = document.getElementById("speakerModalPhoto");
+  const speakerModalName = document.getElementById("speakerModalName");
+  const speakerModalAffil = document.getElementById("speakerModalAffil");
+  const speakerModalBio = document.getElementById("speakerModalBio");
+  const speakerModalAiasLink = document.getElementById("speakerModalAiasLink");
+  const speakerModalWebLink = document.getElementById("speakerModalWebLink");
+
+  const aiasSpeakersDatabase = {
+  "yejin-choi": {
+    "name": "Yejin Choi",
+    "affil": "Dieter Schwarz Foundation HAI Professor, Professor of Computer Science, Senior Fellow\\nStanford HAI",
+    "slug": "yejin-choi",
+    "bio": "Yejin Choi is the Dieter Schwarz Foundation Professor and Senior Fellow at Stanford's Computer Science and Institute for Human-Centered AI (HAI). She is a MacArthur Fellow, AI2050 Senior Fellow, and was named to Time100 Most Influential People in AI (2023, 2025). Choi has received 2 Test-of-Time Awards and 10 Best/Outstanding Paper Awards at top AI conferences. She was a main stage speaker at TED 2023 and has delivered keynotes at several AI conferences including NeurIPS, ICLR, CVPR, ACL, and AAAI. Her research focuses on democratizing generative AI through smaller yet powerful language models, scaling intelligence via smarter algorithms, pluralistic alignment, and AI for science and social good. She received her Ph.D. in Computer Science at Cornell University and BS in Computer Engineering at Seoul National University in Korea.",
+    "image": "images/aias_speakers/yejin-choi.png",
+    "framer_image": "https://framerusercontent.com/images/8q7rNJtBxGmvjpGzN6GKV0NF7FA.png?width=1024&height=1024",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://homes.cs.washington.edu/~yejin/"
+  },
+  "le-cong": {
+    "name": "Le Cong",
+    "affil": "Associate Professor of Pathology (Pathology Research) and of Genetics\\nStanford University",
+    "slug": "le-cong",
+    "bio": "Dr. Cong's research program spans from foundational genome engineering to building agentic AI and autonomous laboratories for biomedical discovery. His group develops advanced technologies for large-scale genome editing and cell therapy, while also leveraging these tools for single-cell functional screening to probe the mechanisms of innate immunity in cancer and neuro-immune diseases. To accelerate these efforts, the team pioneers the integration of AI foundation models into biology. Recent innovations include RNAGenesis foundation model for generative design of RNA, CRISPR-GPT as an AI agent system that automates complex gene-editing workflows, and LabOS, an AI-XR co-scientist platform that embeds reasoning directly into physical laboratory. Alongside upcoming initiatives like the MedOS, the group is building a vision to unify computational design with robotic execution to turn the lab into a programmable, AI-native environment. \\n\\nThe team's work led to one of the first CRISPR/Cas9 gene-editing tools for in vivo gene therapy. More recently, his group invented tools for cleavage-free large gene insertion using novel recombination proteins (SSAP editor) and developed machine-learning optimized single-cell methods (DAISY) for studying complex immune diseases. These tools are also being deployed with collaborators to study stem cell regeneration and brain aging. \\n\\nDr. Cong is a recipient of the NHGRI Genomic Innovator Award, and a Baxter Foundation Faculty Scholar. He has also been recognized among the Genetic Engineering and Biotechnology News (GEN) Top 10 Under 40, Clinical OMICs Pioneers Under 40, and is a Clarivate Web of Science Highly Cited Researcher.",
+    "image": "images/aias_speakers/le-cong.png",
+    "framer_image": "https://framerusercontent.com/images/qQlAJ4KOIaKlVBmJQT3LLLSL9L0.png?width=1024&height=1024",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://profiles.stanford.edu/le-cong"
+  },
+  "karl-deisseroth": {
+    "name": "Karl Deisseroth",
+    "affil": "Chen Professor, Professor of Bioengineering and of Psychiatry and Behavioral Sciences, Stanford University",
+    "slug": "karl-deisseroth",
+    "bio": "Karl Deisseroth is the D.H. Chen Professor of Bioengineering and of Psychiatry and Behavioral Sciences at Stanford University, and Investigator of the Howard Hughes Medical Institute. He received his undergraduate degree from Harvard, his PhD from Stanford, and his MD from Stanford. He also completed postdoctoral training, medical internship, and adult psychiatry residency at Stanford, and he is board-certified by the American Board of Psychiatry and Neurology. He continues as a practicing psychiatrist at Stanford with specialization in affective disorders and autism-spectrum disease, employing medications along with neural stimulation.",
+    "image": "images/aias_speakers/karl-deisseroth.png",
+    "framer_image": "https://framerusercontent.com/images/RNGAcnOEguFTIEs8Bxumgx9E.png?width=1254&height=1254",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://med.stanford.edu/deisseroth-lab.html"
+  },
+  "ying-diao": {
+    "name": "Ying Diao",
+    "affil": "Professor, Departments of Chemical and Biomolecular Engineering, Chemistry, Materials Science and Engineering\\nThrust leader, Molecule Maker Lab Institute \\nUniversity of Illinois at Urbana-Champaign",
+    "slug": "ying-diao",
+    "bio": "Ying Diao is a Professor, University Scholar, LAS Dean\u2019s Distinguished Professorial Scholar and Dow Chemical Company Faculty Scholar in Department of Chemical and Biomolecular Engineering at University of Illinois at Urbana-Champaign. She serves as the Co-Chair of Molecular Science and Engineering in the Beckman Institute of Advanced Science and Technology, and a Thrust Lead of the Molecular Maker Lab Institute \u2013 an NSF AI Institute. She received her Ph.D. degree in Chemical Engineering from MIT in 2012. Her doctoral thesis was on understanding heterogeneous nucleation of pharmaceuticals by designing polymeric substrates. In her subsequent postdoctoral training at Stanford University, she pursued research in the thriving field of printed electronics. Diao group, started in 2015 at Illinois, focuses on understanding assembly of organic functional materials and innovating printing approaches that enable structural control down to the molecular and nanoscale. She has over 120 publications which have been cited ~ 11,000 times. Her work has been frequently featured in scientific journals and news media. She is named to the MIT Technology Review\u2019s annual list of Innovators Under 35 as a pioneer in nanotechnology and materials. She is also a recipient of NSF CAREER Award, NASA Early Career Faculty Award, 3M Non-Tenured Faculty Award, AIChE Allan P. Colburn Award, AIChE Owens Corning Early Career Award and was selected as a Sloan Research Fellow in Chemistry as one of the \u201cvery best scientific minds working today\u201d. In 2025, she received the Presidential Early Career Awards for Scientists and Engineers from President Biden.",
+    "image": "images/aias_speakers/ying-diao.png",
+    "framer_image": "https://framerusercontent.com/images/v4tBWmf3XmN9AWXptYamYlmf0QU.png?width=1254&height=1254",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://diaogroup.web.illinois.edu/"
+  },
+  "simon-du": {
+    "name": "Simon Du",
+    "affil": "Associate Professor, Paul G. Allen School of Computer Science & Engineering, University of Washington. Chief Scientist for Reasoning Models, Apodex",
+    "slug": "simon-du",
+    "bio": "Simon Du is an associate professor in the Paul G. Allen School of Computer Science & Engineering at University of Washington. He is also a Chief Scientist for Reasoning Models at Apodex. His research interests are broadly in machine learning such as reinforcement learning, non-convex optimization, data synthesis and selection, and test-time compute.",
+    "image": "images/aias_speakers/simon-du.png",
+    "framer_image": "https://framerusercontent.com/images/oVVHsjBsSiCuxbw4meBSW5zbP0.png?width=1254&height=1254",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://simonshaoleidu.com/"
+  },
+  "kafui-dzirasa": {
+    "name": "Kafui Dzirasa",
+    "affil": "Eugene and Marie Washington Presidential Distinguished Professor, Duke University",
+    "slug": "kafui-dzirasa",
+    "bio": "Kafui Dzirasa  is an American psychiatrist and Associate Professor at Duke University. He looks to understand the relationship between neural circuit malfunction and mental illness. He was a 2019 AAAS Leshner Fellow and was elected Fellow of the National Academy of Medicine in 2021.",
+    "image": "images/aias_speakers/kafui-dzirasa.png",
+    "framer_image": "https://framerusercontent.com/images/Vnoh99WDey9FPfPurcwQwc.png?width=1254&height=1254",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://dzirasalab.org/"
+  },
+  "heng-ji": {
+    "name": "Heng Ji",
+    "affil": "Professor\\nUniversity of Illinois Urbana-Champaign",
+    "slug": "heng-ji",
+    "bio": "Heng Ji is a professor at Computer Science Department, and an affiliated faculty member at Electrical and Computer Engineering Department and Coordinated Science Laboratory of University of Illinois Urbana-Champaign. She is an Amazon Scholar. She is the Founding Director of Amazon-Illinois Center on AI for Interactive Conversational Experiences (AICE). She received her B.A. and M. A. in Computational Linguistics from Tsinghua University, and her M.S. and Ph.D. in Computer Science from New York University. Her research interests focus on Natural Language Processing, especially on Multimedia Multilingual Information Extraction, Knowledge-enhanced Large Language Models and Vision-Language Models. She was selected as a \\",
+    "image": "images/aias_speakers/heng-ji.png",
+    "framer_image": "https://framerusercontent.com/images/SZF5PcbYnKyfTbr5IiMwqMpBUE.png?width=1024&height=1024",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://blender.cs.illinois.edu/hengji.html"
+  },
+  "christina-kim": {
+    "name": "Christina Kim",
+    "affil": "Assistant Professor in the Omenn-Darling Bioengineering Institute, Princeton University",
+    "slug": "christina-kim",
+    "bio": "Tina received her AB in Molecular Biology from Princeton University in 2011, and her Ph.D. in Neuroscience from Stanford University in 2017 with Karl Deisseroth. She completed her postdoctoral training with Alice Ting at Stanford in 2021.",
+    "image": "images/aias_speakers/christina-kim.png",
+    "framer_image": "https://framerusercontent.com/images/9KGBjuezohEMFPNpkzuIT4JXs0.png?width=1254&height=1254",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://kimlab.princeton.edu/"
+  },
+  "sam-rodriques": {
+    "name": "Sam Rodriques",
+    "affil": "Director, CEO\\nFutureHouse",
+    "slug": "sam-rodriques",
+    "bio": "I am an inventor and entrepreneur. In 2023, I launched FutureHouse, a new research lab in San Francisco focused on building an AI Scientist. In 2025, we spun out Edison Scientific, a for-profit company focused on commercializing our AI agents. I was named one of Time Magazine's 100 most influential people in AI in 2025. I previously ran the Applied Biotechnology Lab at the Francis Crick Institute. Before that, I did my PhD at MIT. I am also interested in metascience, i.e., how we can create new institutions and organizations to facilitate scientific research. I proposed the Focused Research Organization model, which is now being used by a number of philanthropic funders and governments to facilitate scientific moonshots.",
+    "image": "images/aias_speakers/sam-rodriques.png",
+    "framer_image": "https://framerusercontent.com/images/yJSudKUTy1O1u3WWYuA5KtWLb4.png?width=1024&height=1024",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://futurehouse.org/"
+  },
+  "shannon-wiltsey-stirman": {
+    "name": "Shannon Wiltsey Stirman",
+    "affil": "Professor of Psychiatry and Behavioral Sciences (Public Mental Health and Population Sciences)\\nStanford University",
+    "slug": "shannon-wiltsey-stirman",
+    "bio": "Shannon Wiltsey Stirman is a Professor in the Department of Psychiatry and Behavioral Sciences at Stanford and a Psychologist at the National Center for PTSD's Dissemination and Training Division. She is the co-director of the Center for Responsible and Effective AI Technology Enhancement for PTSD Treatment (CREATE). Areas of research emphasis include implementation science (particularly training, fidelity, adaptation and sustainment), evidence-based treatment for PTSD, depression, suicide prevention, and use of technology to support access to evidence-based mental health interventions. As a co-lead of the Department of Psychiatry and Behavioral Science's Mental Health Innovation and Technology Hub, she worked with a team at Stanford to develop Pause a Moment, a digital wellbeing program for healthcare workers who experience COVID-19 stressors (pam.stanford.edu). \\n\\nMost recently, she has been working on the use of Large Language Models to support evidence-based mental health interventions. She is the co-author of Getting Unstuck from PTSD: Using Cognitive Processing Therapy to Guide Your Recovery. She has served on the Board of Directors for the American Psychological Association and as the Chair of the Established Network of Expertise for the Society for Implementation Research Collaboration. She was awarded the Association of Behavior and Cognitive Therapy's Mid-Career Innovator award in 2018. Her research has been funded by the National Institute of Mental Health, VA QUERI, private foundations, and the Canadian Institute for Health Research.",
+    "image": "images/aias_speakers/shannon-wiltsey-stirman.png",
+    "framer_image": "https://framerusercontent.com/images/kewhuYbRfQf8uVkSGq6J3XUoR0k.png?width=1254&height=1254",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://profiles.stanford.edu/shannon-wiltsey-stirman"
+  },
+  "terence-tao": {
+    "name": "Terence Tao",
+    "affil": "Professor of Mathematics, Director of Special Projects\\nUCLA, IPAM",
+    "slug": "terence-tao",
+    "bio": "Terence Tao was born in Adelaide, Australia in 1975. He has been a professor of mathematics at UCLA since 1999, having completed his PhD under Elias Stein at Princeton in 1996. Tao\u2019s areas of research include harmonic analysis, PDE, combinatorics, and number theory. He has received a number of awards, including the Salem Prize in 2000, the Fields Medal in 2006, the MacArthur Fellowship in 2007, the Crafoord prize in 2012, and the Breakthrough Prize in Mathematics in 2015. Terence Tao also holds the James and Carol Collins chair in mathematics at UCLA, and is a Fellow of the Royal Society, the Australian Academy of Sciences, the National Academy of Sciences, and the American Academy of Arts and Sciences. From 2020-2024, he served on the President\u2019s Council of Advisors on Science and Technology.",
+    "image": "images/aias_speakers/terence-tao.png",
+    "framer_image": "https://framerusercontent.com/images/HxAab4Wj7barGcWXUGaOyClVWLA.png?width=1024&height=1024",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://www.math.ucla.edu/~tao/"
+  },
+  "maxim-topaz": {
+    "name": "Maxim Topaz",
+    "affil": "Elizabeth Standish Gill Associate Professor of Nursing\\nColumbia University",
+    "slug": "maxim-topaz",
+    "bio": "Maxim Topaz's research focuses on improving human health via cutting-edge technologies. His team develops artificial intelligence solutions that help health providers to provide best care for their patients. Specifically, they developed an open source natural language processing software(link is external and opens in a new window) called NimlbeMiner(link is external and opens in a new window) that clinicians and researchers can use to mine millions of patient records. In addition, his team is developing and implementing several clinical decision support tools. For example, they are currently testing(link is external and opens in a new window) a patient prioritization tool PREVENT(link is external and opens in a new window) that assists with identifying high risk patients during hospital to homecare transitions.\u00a0In another\u00a0study(link is external and opens in a new window), they are using Artificial Intelligence to create personalized models of risk for preventable hospitalization and\u00a0emergency department visits in homecare(link is external and opens in a new window). Overall, he published more than\u00a0100 articles(link is external and opens in a new window)\u00a0on topics related to data science and informatics.",
+    "image": "images/aias_speakers/maxim-topaz.png",
+    "framer_image": "https://framerusercontent.com/images/26RHXbhqIiz7wTuZ1VnlFltoY4.png?width=1024&height=1024",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://www.nursing.columbia.edu/profile/maxim-topaz"
+  },
+  "jeffrey-ullman": {
+    "name": "Jeffrey Ullman",
+    "affil": "SW Ascherman Prof. of Engineering (emeritus), Department of Computer Science, \\nStanford University",
+    "slug": "jeffrey-ullman",
+    "bio": "Jeff Ullman is the Stanford W. Ascherman Professor of Engineering (Emeritus) in the Department of Computer Science at Stanford University. He received the B.S. degree from Columbia University in 1963 and the PhD from Princeton in 1966. Prior to his appointment at Stanford in 1979, he was a member of the technical staff of Bell Laboratories from 1966-1969, and on the faculty of Princeton University between 1969 and 1979. From 1990-1994, he was chair of the Stanford Computer Science Department. Ullman was elected to the National Academy of Engineering in 1989, the American Academy of Arts and Sciences in 2012, the National Academy of Science in 2020, and has held Guggenheim and Einstein Fellowships. He has received the Sigmod Contributions Award (1996), the ACM Karl V. Karlstrom Outstanding Educator Award (1998), the Knuth Prize (2000), the Sigmod E. F. Codd Innovations award (2006), the IEEE von Neumann medal (2010), the NEC C&C Foundation Prize (2017), and the ACM A.M. Turing Award (2020). He is the author of 16 books, including books on database systems, data mining, compilers, automata theory, and algorithms.",
+    "image": "images/aias_speakers/jeffrey-ullman.png",
+    "framer_image": "https://framerusercontent.com/images/u3s2kdhG7MHSPRlBIdIAeiQY5I.png?width=1024&height=1024",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "http://infolab.stanford.edu/~ullman/"
+  },
+  "kyunghyun-cho": {
+    "name": "Kyunghyun Cho",
+    "affil": "Glen de Vries Professor of Health Statistics\\nProfessor at CILVR Group, Computer Science (Courant Institute) and Center for Data Science\\nCo-Director of Global Frontier AI Lab \\nNew York University",
+    "slug": "kyunghyun-cho",
+    "bio": "Kyunghyun Cho is the Glen de Vries Professor of Health Statistics and a professor of computer science and data science at New York University. He is also a CIFAR Fellow of Learning in Machines & Brains and an Associate Member of the National Academy of Engineering of Korea. Early 2021, he co-founded Prescient Design which was acquired by Genentech late 2021. Since then, he served as an Executive Director of Frontier Research and a Senior Fellow at Genentech until January 2026. He served as a (co-)Program Chair of ICLR 2020, NeurIPS 2022 and ICML 2022 and also on the boards of ICML and ICLR. He was one of the three founding Editors-in-Chief of the Transactions on Machine Learning Research (TMLR) until 2024. He was a research scientist at Facebook AI Research from June 2017 to May 2020 and a postdoctoral fellow at University of Montreal until Summer 2015 under the supervision of Prof. Yoshua Bengio, after receiving MSc and PhD degrees from Aalto University April 2011 and April 2014, respectively, under the supervision of Prof. Juha Karhunen, Dr. Tapani Raiko and Dr. Alexander Ilin. He received the Samsung Ho-Am Prize in Engineering in 2021. He tries his best to find a balance among machine learning, natural language processing, and life, but almost always fails to do so.",
+    "image": "images/aias_speakers/kyunghyun-cho.png",
+    "framer_image": "https://framerusercontent.com/images/Q3ind51FhtXf2XexMqYriIMSY.png?width=1254&height=1254",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://kyunghyuncho.me/"
+  },
+  "toby-walsh": {
+    "name": "Toby Walsh",
+    "affil": "Laureate Fellow, Scientia Professor of Artificial Intelligence\\nUniversity of New South Wales",
+    "slug": "toby-walsh",
+    "bio": "Toby Walsh is Laureate Fellow and Scientia Professor of Artificial Intelligence at the Department of Computer Science and Engineering at the University of New South Wales, research group leader at Data61, adjunct professor at QUT, external Professor of the Department of Information Science at Uppsala University, an honorary fellow of the School of Informatics at Edinburgh University and an Associate Member of the Australian Human Rights Institute at UNSW. \\n\\nHe was Editor-in-Chief of the Journal of Artificial Intelligence Research, and of AI Communications. He is on the editorial board of the Journal of the ACM, Journal of Automated Reasoning and the Constraints journal. He has been elected a fellow of the Australian Academy of Science, the Association of Computing Machinery (ACM), the American Association for the Advancement of Science, the Association for the Advancement of Artificial Intelligence, and the European Coordinating Committee for AI in recognition of his reseach in artificial intelligence and service to the community. He has won the NSW Premier's Prize for Excellende in Engineering and ICT, the Humbolt Award, the Research Excellence Award of the Association for Constraint Programming and the .IJCAI Donald E. Walker Distinguished Service Award. He has been Secretary of the Associtation for Constraint Programming (ACP) and is Editor of CP News, the newsletter of the ACP. He is one of the Editors of the Handbook for Constraint Programming, and the Handbook for Satisfiability. \\n\\nHe has been Program and Conference Chair of the main conferences in Constraint Programming, Automated Reasoning and Artificial Intelligence.",
+    "image": "images/aias_speakers/toby-walsh.png",
+    "framer_image": "https://framerusercontent.com/images/kLY1sWdIoTy0CMCqT3S8BVP4AFI.png?width=1024&height=1024",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://www.cse.unsw.edu.au/~tw/"
+  },
+  "rebecca-willett": {
+    "name": "Rebecca Willett",
+    "affil": "Worah Family Professor in the Wallman Society of Fellows, Computer Science, Statistics, and the CollegeFaculty Director of AI, Data Science Institute\\nUniversity of Chicago",
+    "slug": "rebecca-willett",
+    "bio": "Rebecca Willett is a Professor of Statistics and Computer Science at the University of Chicago and Faculty Director of AI at the Data Science Institute. Her research is focused on machine learning, signal processing, and large-scale data science. She completed her PhD in Electrical and Computer Engineering at Rice University in 2005 and was an Assistant then tenured Associate Professor of Electrical and Computer Engineering at Duke University from 2005 to 2013. She was an Associate Professor of Electrical and Computer Engineering, Harvey D. Spangler Faculty Scholar, and Fellow of the Wisconsin Institutes for Discovery at the University of Wisconsin-Madison from 2013 to 2018. Willett received the National Science Foundation CAREER Award in 2007, is a member of the DARPA Computer Science Study Group, and received an Air Force Office of Scientific Research Young Investigator Program award in 2010. Willett has also held visiting researcher or faculty positions at the University of Nice in 2015, the Institute for Pure and Applied Mathematics at UCLA in 2004, the University of Wisconsin-Madison 2003-2005, the French National Institute for Research in Computer Science and Control (INRIA) in 2003, and the Applied Science Research and Development Laboratory at GE Healthcare in 2002.",
+    "image": "images/aias_speakers/rebecca-willett.png",
+    "framer_image": "https://framerusercontent.com/images/Zz9hqWzXeQfwGYFRADSZ2FYkE.png?width=1024&height=1024",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://voices.uchicago.edu/willett/"
+  },
+  "james-zou": {
+    "name": "James Zou",
+    "affil": "Associate Professor of Biomedical Data Science and, by courtesy, of Computer Science and of Electrical Engineering\\nStanford University",
+    "slug": "james-zou",
+    "bio": "I am an Associate Professor of Biomedical Data Science and, by courtesy, of Computer Science and Electrical Engineering at Stanford University. I work on making AI more reliable, human-compatible and statistically rigorous, and am especially interested in applications in human disease and health. I received my Ph.D from Harvard in 2014, and was at one time a member of Microsoft Research, a Gates Scholar at Cambridge and a Simons fellow at U.C. Berkeley. I joined Stanford in 2016 and am excited to also be a Chan-Zuckerberg Investigator. We are also a part of the Stanford AI Lab. My research is supported by two Chan-Zuckerberg Biohub Investigator Awards, the Sloan Fellowship, the NSF CAREER Award, a Top Ten Clinical Achievement Award and faculty awards from Google, Adobe and Amazon.",
+    "image": "images/aias_speakers/james-zou.png",
+    "framer_image": "https://framerusercontent.com/images/YvCkwvlNEpAG7y3zYvjT4GCkkY.png?width=1024&height=1024",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://www.james-zou.com/"
+  },
+  "jennifer-doudna": {
+    "name": "Dr. Jennifer Doudna",
+    "affil": "Nobel Laureate in Chemistry \u00b7 UC Berkeley & Gladstone Institutes",
+    "slug": "jennifer-doudna",
+    "bio": "Dr. Jennifer Doudna was awarded the 2020 Nobel Prize in Chemistry for pioneering CRISPR-Cas9 genome editing technology. She is the Li Ka Shing Chancellor's Chair Professor in the Departments of Chemistry and Molecular and Cell Biology at UC Berkeley, and Senior Investigator at the Gladstone Institutes and Howard Hughes Medical Institute.",
+    "image": "images/aias_speakers/jennifer_doudna.jpg",
+    "framer_image": "https://framerusercontent.com/images/HxAab4Wj7barGcWXUGaOyClVWLA.png",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://vcresearch.berkeley.edu/faculty/jennifer-doudna"
+  },
+  "david-baker": {
+    "name": "Dr. David Baker",
+    "affil": "Nobel Laureate in Chemistry \u00b7 Director, Institute for Protein Design, Univ. of Washington",
+    "slug": "david-baker",
+    "bio": "Dr. David Baker received the 2024 Nobel Prize in Chemistry for computational protein design. He is the Director of the Institute for Protein Design, Henrietta and Aubrey Davis Endowed Professor in Biochemistry at the University of Washington School of Medicine, and an Investigator at the Howard Hughes Medical Institute.",
+    "image": "images/aias_speakers/david_baker.jpg",
+    "framer_image": "https://framerusercontent.com/images/edBRGqqlZOkE69NDDjPYvlow.png",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://www.bakerlab.org/"
+  },
+  "omar-yaghi": {
+    "name": "Dr. Omar M. Yaghi",
+    "affil": "James and Neeltje Tretter Chair Professor of Chemistry \u00b7 UC Berkeley",
+    "slug": "omar-yaghi",
+    "bio": "Dr. Omar M. Yaghi is the James and Neeltje Tretter Chair Professor of Chemistry at UC Berkeley and Co-Director of the Kavli Energy NanoSciences Institute. He pioneered reticular chemistry, creating new classes of porous materials including Metal-Organic Frameworks (MOFs) and Covalent Organic Frameworks (COFs) for carbon capture and clean energy.",
+    "image": "images/aias_speakers/omar_yaghi.jpg",
+    "framer_image": "https://framerusercontent.com/images/wPWsPy0a6PE4u8Ik1h7rVSnthuE.jpg",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://yaghi.berkeley.edu/"
+  },
+  "chris-bishop": {
+    "name": "Dr. Christopher Bishop",
+    "affil": "Technical Fellow & Director \u00b7 Microsoft Research AI4Science",
+    "slug": "chris-bishop",
+    "bio": "Dr. Christopher Bishop, FRS, FRSE, is Technical Fellow and Director of Microsoft Research AI4Science. He is an internationally renowned scientist in artificial intelligence and machine learning, and author of the definitive textbooks Pattern Recognition and Machine Learning and Deep Learning: Foundations and Concepts.",
+    "image": "images/aias_speakers/chris_bishop.jpg",
+    "framer_image": "https://framerusercontent.com/images/mbjCDIMwCRgzWcvfcVW4xDJP0.jpg",
+    "aias_link": "https://www.aiasplus.org/#speakers",
+    "website": "https://www.microsoft.com/en-us/research/people/cmbishop/"
+  }
+};
+
+  function openSpeakerModal(slug) {
+    const speaker = aiasSpeakersDatabase[slug];
+    if (!speaker) return;
+
+    if (speakerModalPhoto) {
+      speakerModalPhoto.src = speaker.image;
+      speakerModalPhoto.alt = speaker.name;
+    }
+    if (speakerModalName) {
+      speakerModalName.textContent = speaker.name;
+    }
+    if (speakerModalAffil) {
+      speakerModalAffil.textContent = speaker.affil;
+    }
+    if (speakerModalBio) {
+      speakerModalBio.textContent = speaker.bio;
+    }
+    if (speakerModalAiasLink) {
+      speakerModalAiasLink.href = speaker.aias_link || "https://www.aiasplus.org/#speakers";
+    }
+
+    if (speakerModalWebLink) {
+      if (speaker.website) {
+        speakerModalWebLink.href = speaker.website;
+        speakerModalWebLink.style.display = "inline-flex";
+      } else {
+        speakerModalWebLink.style.display = "none";
+      }
+    }
+
+    if (speakerModalBackdrop) {
+      speakerModalBackdrop.classList.add("active");
+      speakerModalBackdrop.setAttribute("aria-hidden", "false");
+    }
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeSpeakerModal() {
+    if (!speakerModalBackdrop) return;
+    speakerModalBackdrop.classList.remove("active");
+    speakerModalBackdrop.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  if (speakerModalCloseBtn) {
+    speakerModalCloseBtn.addEventListener("click", closeSpeakerModal);
+  }
+
+  if (speakerModalBackdrop) {
+    speakerModalBackdrop.addEventListener("click", (e) => {
+      if (e.target === speakerModalBackdrop) {
+        closeSpeakerModal();
+      }
+    });
+  }
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && speakerModalBackdrop && speakerModalBackdrop.classList.contains("active")) {
+      closeSpeakerModal();
+    }
+  });
+
+  // Delegate clicks on any speaker card / name / button with data-speaker-slug
+  document.addEventListener("click", (e) => {
+    const trigger = e.target.closest("[data-speaker-slug]");
+    if (trigger && !hasMoved) {
+      // Do not intercept if clicking the academic website icon link specifically
+      if (e.target.closest(".icon-link")) return;
+
+      const slug = trigger.getAttribute("data-speaker-slug");
+      if (slug && aiasSpeakersDatabase[slug]) {
+        e.preventDefault();
+        e.stopPropagation();
+        openSpeakerModal(slug);
+      }
+    }
+  });
+
 });
