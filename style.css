@@ -1115,25 +1115,31 @@ a:hover { color: var(--color-primary); }
   margin-top: auto;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  padding-top: 0.85rem;
+  gap: 0.35rem;
+  flex-wrap: nowrap;
+  padding-top: 0.75rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
 }
 
 .link-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.75rem;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.32rem 0.45rem;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.1);
   color: #ffffff !important;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.22);
   text-decoration: none;
   transition: all 0.2s ease;
+  white-space: nowrap;
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
 }
 
 .link-pill:hover {
@@ -1146,17 +1152,22 @@ a:hover { color: var(--color-primary); }
 .linkedin-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.75rem;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.32rem 0.45rem;
   border-radius: 6px;
   background: rgba(10, 102, 194, 0.3);
   color: #bfdbfe !important;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 600;
   border: 1px solid rgba(96, 165, 250, 0.45);
   text-decoration: none;
   transition: all 0.2s ease;
   font-family: var(--font-mono);
+  white-space: nowrap;
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
 }
 
 .linkedin-pill:hover {
@@ -1165,6 +1176,10 @@ a:hover { color: var(--color-primary); }
   border-color: #0a66c2;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(10, 102, 194, 0.4);
+}
+
+.linkedin-pill svg {
+  flex-shrink: 0;
 }
 
 /* Invited Speakers Grid */
@@ -1986,10 +2001,11 @@ a:hover { color: var(--color-primary); }
   margin-top: auto;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  padding-top: 0.85rem;
+  gap: 0.35rem;
+  flex-wrap: nowrap;
+  padding-top: 0.75rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
 }
 
 .facilitator-pc-callout {
@@ -2019,6 +2035,18 @@ a:hover { color: var(--color-primary); }
 
 .photo-top-focus {
   object-position: 50% 10% !important;
+}
+
+.photo-zoom-out {
+  object-position: 50% 8% !important;
+}
+
+.photo-akila {
+  object-position: 50% 8% !important;
+}
+
+.photo-marco {
+  object-position: 50% 8% !important;
 }
 
 /* Backward compatibility for organizers */
