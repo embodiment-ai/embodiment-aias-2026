@@ -82,9 +82,9 @@ a:hover { color: var(--color-primary); }
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 1.25rem 0;
+  padding: 1.15rem 0;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  background: rgba(8, 14, 28, 0.6);
+  background: rgba(8, 14, 28, 0.65);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -96,25 +96,30 @@ a:hover { color: var(--color-primary); }
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(147, 197, 253, 0.22);
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.7);
-  padding: 0.95rem 0;
+  padding: 0.85rem 0;
 }
 
 .nav-container {
-  max-width: var(--container-max);
+  max-width: 1380px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.25rem;
 }
 
 .nav-logo {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   letter-spacing: -0.025em;
   color: #ffffff !important;
   transition: var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav-logo:hover {
@@ -128,17 +133,20 @@ a:hover { color: var(--color-primary); }
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 0.35rem;
+  gap: 0.25rem;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
 .nav-links a {
   color: rgba(226, 232, 240, 0.88);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  padding: 0.6rem 0.95rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 8px;
   transition: all 0.2s ease;
+  white-space: nowrap;
+  display: inline-block;
 }
 
 .nav-links a:hover {
@@ -158,13 +166,14 @@ a:hover { color: var(--color-primary); }
 .nav-cta {
   background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
   color: #ffffff !important;
-  padding: 0.62rem 1.4rem !important;
+  padding: 0.52rem 1.25rem !important;
   border-radius: 8px !important;
   font-weight: 700 !important;
-  font-size: 0.95rem !important;
+  font-size: 0.92rem !important;
   transition: all 0.25s ease !important;
   box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
 }
 
 .nav-cta:hover {
