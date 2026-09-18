@@ -572,8 +572,8 @@ a:hover { color: var(--color-primary); }
 .keynote-avatar-wrapper {
   position: relative;
   flex-shrink: 0;
-  width: 105px;
-  height: 105px;
+  width: 135px;
+  height: 135px;
 }
 
 .keynote-avatar {
@@ -1218,16 +1218,16 @@ a:hover { color: var(--color-primary); }
 }
 
 .speaker-avatar-wrap {
-  width: 92px;
-  height: 92px;
-  border-radius: 14px;
+  width: 140px;
+  height: 140px;
+  border-radius: 16px;
   overflow: hidden;
   position: relative;
   background: #080e1c;
   display: block;
-  border: 2px solid rgba(147, 197, 253, 0.3);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
-  margin-bottom: 0.45rem;
+  border: 2px solid rgba(147, 197, 253, 0.35);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.75rem;
 }
 
 .speaker-avatar-wrap img {
@@ -1243,17 +1243,22 @@ a:hover { color: var(--color-primary); }
 }
 
 .speaker-card-badge {
-  display: inline-block;
-  background: rgba(14, 25, 48, 0.9);
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: rgba(8, 14, 28, 0.92);
+  backdrop-filter: blur(8px);
   color: #bfdbfe;
   font-family: var(--font-mono);
   font-size: 0.62rem;
   font-weight: 600;
-  padding: 0.15rem 0.55rem;
-  border-radius: 9999px;
-  border: 1px solid rgba(147, 197, 253, 0.25);
-  letter-spacing: 0.04em;
+  padding: 0.18rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  letter-spacing: 0.03em;
   white-space: nowrap;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .speaker-card-body {
