@@ -2307,6 +2307,10 @@ a:hover { color: var(--color-primary); }
   object-position: 50% 18% !important;
 }
 
+.photo-achuta {
+  object-position: 50% 15% !important;
+}
+
 /* Backward compatibility for organizers */
 .organizers-grid {
   display: grid;
