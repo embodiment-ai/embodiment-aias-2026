@@ -408,7 +408,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollSpeed = 0.85; // Smooth continuous glide speed
 
     function autoScrollReel() {
-      if (!isPaused && !isDragging) {
+      const hasExpandedCard = speakersTrack.querySelector('.is-expanded') !== null;
+      if (!isPaused && !isDragging && !hasExpandedCard) {
         virtualScrollLeft += scrollSpeed;
         const halfWidth = speakersTrack.scrollWidth / 2;
         if (halfWidth > 0 && virtualScrollLeft >= halfWidth) {
@@ -539,4 +540,23 @@ document.addEventListener('DOMContentLoaded', () => {
     'aiasReelNextBtn',
     280
   );
+
+  // --- Expandable Speaker Bios ---
+  document.addEventListener('click', (e) => {
+    // Allow external link clicks (Website, LinkedIn, etc.) to proceed normally
+    if (e.target.closest('a')) return;
+
+    const card = e.target.closest('.has-expandable-bio');
+    if (!card) return;
+
+    const isExpanded = card.classList.toggle('is-expanded');
+    const toggleBtn = card.querySelector('.bio-toggle-btn');
+    if (toggleBtn) {
+      toggleBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      const textSpan = toggleBtn.querySelector('.bio-toggle-text');
+      if (textSpan) {
+        textSpan.textContent = isExpanded ? 'Hide Full Bio' : 'Read Full Bio';
+      }
+    }
+  });
 });

@@ -1380,6 +1380,7 @@ a:hover { color: var(--color-primary); }
   display: flex;
   gap: 1.35rem;
   width: max-content;
+  align-items: flex-start;
 }
 
 .invited-speakers-track .speaker-card,
@@ -1388,6 +1389,132 @@ a:hover { color: var(--color-primary); }
   min-width: 280px;
   max-width: 280px;
   flex-shrink: 0;
+}
+
+.invited-speakers-track .speaker-card {
+  min-height: 525px;
+}
+
+.invited-speakers-track .speaker-full-card {
+  min-height: 560px;
+}
+
+.invited-speakers-track .speaker-card.is-expanded,
+.invited-speakers-track .speaker-full-card.is-expanded {
+  width: 340px;
+  min-width: 340px;
+  max-width: 340px;
+  border-color: rgba(96, 165, 250, 0.75);
+  box-shadow: 0 24px 52px -8px rgba(0, 0, 0, 0.85), 0 0 28px rgba(59, 130, 246, 0.3);
+}
+
+.has-expandable-bio {
+  cursor: pointer;
+}
+
+.speaker-expanded-bio {
+  display: none;
+  color: #f1f5f9 !important;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin-top: 0.35rem;
+  margin-bottom: 0.85rem;
+  padding: 0.75rem 0.85rem;
+  background: rgba(8, 14, 28, 0.55);
+  border: 1px solid rgba(147, 197, 253, 0.22);
+  border-radius: 10px;
+  animation: fadeInBio 0.25s ease;
+}
+
+.speaker-expanded-bio p {
+  margin: 0 0 0.65rem 0;
+  color: #f1f5f9 !important;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.speaker-expanded-bio p:last-child {
+  margin-bottom: 0;
+}
+
+.keynote-card .speaker-expanded-bio {
+  font-size: 0.86rem;
+  line-height: 1.65;
+  padding: 1rem 1.15rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.keynote-card .speaker-expanded-bio p {
+  font-size: 0.86rem;
+  line-height: 1.65;
+  margin-bottom: 0.8rem;
+}
+
+.has-expandable-bio.is-expanded .speaker-expanded-bio {
+  display: block;
+}
+
+.has-expandable-bio.is-expanded .speaker-desc,
+.has-expandable-bio.is-expanded .speaker-full-desc,
+.has-expandable-bio.is-expanded .keynote-bio {
+  display: none;
+}
+
+.bio-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background: rgba(251, 146, 60, 0.14);
+  color: #fb923c;
+  border: 1px solid rgba(251, 146, 60, 0.38);
+  border-radius: 6px;
+  padding: 0.32rem 0.7rem;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: auto;
+  margin-bottom: 0.65rem;
+  align-self: flex-start;
+}
+
+.keynote-card .bio-toggle-btn {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.76rem;
+}
+
+.bio-toggle-btn:hover,
+.has-expandable-bio.is-expanded .bio-toggle-btn {
+  background: rgba(251, 146, 60, 0.26);
+  color: #fdba74;
+  border-color: rgba(251, 146, 60, 0.65);
+}
+
+.bio-toggle-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.has-expandable-bio.is-expanded .bio-toggle-arrow {
+  transform: rotate(180deg);
+}
+
+@keyframes fadeInBio {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .speaker-card {
@@ -1512,8 +1639,7 @@ a:hover { color: var(--color-primary); }
   color: #e2e8f0 !important;
   font-size: 0.8rem;
   line-height: 1.48;
-  margin-top: auto;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
 }
 
 /* --- Section Utilities --- */
