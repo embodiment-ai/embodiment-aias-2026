@@ -382,19 +382,21 @@ document.addEventListener('DOMContentLoaded', () => {
     animate();
   }
 
-  // --- AIAS+ 2026 Main Conference Speakers Rotating Carousel ---
-  const aiasReelContainer = document.getElementById('aiasSpeakersReelContainer');
-  const aiasSpeakersTrack = document.getElementById('aiasSpeakersTrack');
-  const aiasReelPrevBtn = document.getElementById('aiasReelPrevBtn');
-  const aiasReelNextBtn = document.getElementById('aiasReelNextBtn');
+  // --- Infinite Continuous Rotating Speaker Carousels ---
+  function initSpeakerCarousel(containerId, trackId, prevBtnId, nextBtnId, scrollStep = 280) {
+    const reelContainer = document.getElementById(containerId);
+    const speakersTrack = document.getElementById(trackId);
+    const reelPrevBtn = document.getElementById(prevBtnId);
+    const reelNextBtn = document.getElementById(nextBtnId);
 
-  if (aiasReelContainer && aiasSpeakersTrack) {
+    if (!reelContainer || !speakersTrack) return;
+
     // Clone cards once for infinite continuous scroll loop
-    const originalCards = Array.from(aiasSpeakersTrack.children);
+    const originalCards = Array.from(speakersTrack.children);
     originalCards.forEach(card => {
       const clone = card.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
-      aiasSpeakersTrack.appendChild(clone);
+      speakersTrack.appendChild(clone);
     });
 
     let isPaused = false;
@@ -406,10 +408,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function autoScrollReel() {
       if (!isPaused && !isDragging) {
-        aiasReelContainer.scrollLeft += scrollSpeed;
-        const halfWidth = aiasSpeakersTrack.scrollWidth / 2;
-        if (aiasReelContainer.scrollLeft >= halfWidth) {
-          aiasReelContainer.scrollLeft -= halfWidth;
+        reelContainer.scrollLeft += scrollSpeed;
+        const halfWidth = speakersTrack.scrollWidth / 2;
+        if (reelContainer.scrollLeft >= halfWidth) {
+          reelContainer.scrollLeft -= halfWidth;
         }
       }
       requestAnimationFrame(autoScrollReel);
@@ -418,50 +420,50 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(autoScrollReel);
 
     // Pause on hover
-    aiasReelContainer.addEventListener('mouseenter', () => { isPaused = true; });
-    aiasReelContainer.addEventListener('mouseleave', () => { isPaused = false; });
+    reelContainer.addEventListener('mouseenter', () => { isPaused = true; });
+    reelContainer.addEventListener('mouseleave', () => { isPaused = false; });
 
     // Drag-to-scroll (Mouse)
-    aiasReelContainer.addEventListener('mousedown', (e) => {
+    reelContainer.addEventListener('mousedown', (e) => {
       isDragging = true;
       hasMoved = false;
       isPaused = true;
-      startX = e.pageX - aiasReelContainer.offsetLeft;
-      scrollStart = aiasReelContainer.scrollLeft;
+      startX = e.pageX - reelContainer.offsetLeft;
+      scrollStart = reelContainer.scrollLeft;
     });
 
     window.addEventListener('mouseup', () => {
       if (isDragging) {
         isDragging = false;
-        aiasReelContainer.style.cursor = 'grab';
+        reelContainer.style.cursor = 'grab';
         setTimeout(() => { isPaused = false; }, 800);
       }
     });
 
     window.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
-      const x = e.pageX - aiasReelContainer.offsetLeft;
+      const x = e.pageX - reelContainer.offsetLeft;
       const diff = Math.abs(x - startX);
       if (diff > 4) {
         hasMoved = true;
-        aiasReelContainer.style.cursor = 'grabbing';
+        reelContainer.style.cursor = 'grabbing';
         e.preventDefault();
         const walk = (x - startX) * 1.35;
-        aiasReelContainer.scrollLeft = scrollStart - walk;
-        
-        const halfWidth = aiasSpeakersTrack.scrollWidth / 2;
-        if (aiasReelContainer.scrollLeft >= halfWidth) {
-          aiasReelContainer.scrollLeft -= halfWidth;
+        reelContainer.scrollLeft = scrollStart - walk;
+
+        const halfWidth = speakersTrack.scrollWidth / 2;
+        if (reelContainer.scrollLeft >= halfWidth) {
+          reelContainer.scrollLeft -= halfWidth;
           scrollStart -= halfWidth;
-        } else if (aiasReelContainer.scrollLeft <= 0) {
-          aiasReelContainer.scrollLeft += halfWidth;
+        } else if (reelContainer.scrollLeft <= 0) {
+          reelContainer.scrollLeft += halfWidth;
           scrollStart += halfWidth;
         }
       }
     });
 
     // Prevent link click only if user actually dragged the carousel
-    aiasReelContainer.addEventListener('click', (e) => {
+    reelContainer.addEventListener('click', (e) => {
       if (hasMoved) {
         e.preventDefault();
         e.stopPropagation();
@@ -469,38 +471,55 @@ document.addEventListener('DOMContentLoaded', () => {
     }, true);
 
     // Touch support for mobile
-    aiasReelContainer.addEventListener('touchstart', () => {
+    reelContainer.addEventListener('touchstart', () => {
       isPaused = true;
     }, { passive: true });
 
-    aiasReelContainer.addEventListener('touchend', () => {
+    reelContainer.addEventListener('touchend', () => {
       setTimeout(() => { isPaused = false; }, 1200);
     }, { passive: true });
 
     // Arrow controls
-    const scrollStep = 280;
-    if (aiasReelPrevBtn) {
-      aiasReelPrevBtn.addEventListener('click', () => {
+    if (reelPrevBtn) {
+      reelPrevBtn.addEventListener('click', () => {
         isPaused = true;
-        const halfWidth = aiasSpeakersTrack.scrollWidth / 2;
-        if (aiasReelContainer.scrollLeft <= 50) {
-          aiasReelContainer.scrollLeft += halfWidth;
+        const halfWidth = speakersTrack.scrollWidth / 2;
+        if (reelContainer.scrollLeft <= 50) {
+          reelContainer.scrollLeft += halfWidth;
         }
-        aiasReelContainer.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+        reelContainer.scrollBy({ left: -scrollStep, behavior: 'smooth' });
         setTimeout(() => { isPaused = false; }, 1500);
       });
     }
 
-    if (aiasReelNextBtn) {
-      aiasReelNextBtn.addEventListener('click', () => {
+    if (reelNextBtn) {
+      reelNextBtn.addEventListener('click', () => {
         isPaused = true;
-        const halfWidth = aiasSpeakersTrack.scrollWidth / 2;
-        if (aiasReelContainer.scrollLeft >= halfWidth - 50) {
-          aiasReelContainer.scrollLeft -= halfWidth;
+        const halfWidth = speakersTrack.scrollWidth / 2;
+        if (reelContainer.scrollLeft >= halfWidth - 50) {
+          reelContainer.scrollLeft -= halfWidth;
         }
-        aiasReelContainer.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        reelContainer.scrollBy({ left: scrollStep, behavior: 'smooth' });
         setTimeout(() => { isPaused = false; }, 1500);
       });
     }
   }
+
+  // Initialize Workshop Invited Speakers Carousel
+  initSpeakerCarousel(
+    'workshopSpeakersReelContainer',
+    'workshopSpeakersTrack',
+    'workshopReelPrevBtn',
+    'workshopReelNextBtn',
+    300
+  );
+
+  // Initialize AIAS+ 2026 Main Conference Speakers Carousel
+  initSpeakerCarousel(
+    'aiasSpeakersReelContainer',
+    'aiasSpeakersTrack',
+    'aiasReelPrevBtn',
+    'aiasReelNextBtn',
+    280
+  );
 });

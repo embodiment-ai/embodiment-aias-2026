@@ -1369,11 +1369,25 @@ a:hover { color: var(--color-primary); }
   flex-shrink: 0;
 }
 
-/* Invited Speakers Grid */
+/* Invited Speakers Grid & Carousel Track */
 .invited-speakers-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.9rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.invited-speakers-track {
+  display: flex;
+  gap: 1.35rem;
+  width: max-content;
+}
+
+.invited-speakers-track .speaker-card,
+.invited-speakers-track .speaker-full-card {
+  width: 280px;
+  min-width: 280px;
+  max-width: 280px;
+  flex-shrink: 0;
 }
 
 .speaker-card {
@@ -1399,7 +1413,7 @@ a:hover { color: var(--color-primary); }
 .speaker-avatar-wrap {
   position: relative;
   width: 100%;
-  height: 265px;
+  height: 270px;
   overflow: hidden;
   display: block;
   background: #080e1c;
@@ -1422,15 +1436,15 @@ a:hover { color: var(--color-primary); }
 
 .speaker-card-badge {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
+  bottom: 10px;
+  right: 10px;
   background: rgba(8, 14, 28, 0.92);
   backdrop-filter: blur(8px);
   color: #bfdbfe;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  padding: 0.2rem 0.55rem;
+  padding: 0.22rem 0.6rem;
   border-radius: 6px;
   border: 1px solid rgba(147, 197, 253, 0.35);
   letter-spacing: 0.04em;
@@ -1440,7 +1454,7 @@ a:hover { color: var(--color-primary); }
 }
 
 .speaker-card-body {
-  padding: 1.25rem 1.15rem 1.15rem;
+  padding: 1.35rem 1.25rem 1.25rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -1462,11 +1476,11 @@ a:hover { color: var(--color-primary); }
 
 .speaker-card-body h4 {
   font-family: var(--font-heading);
-  font-size: 1.02rem;
+  font-size: 1.08rem;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.02em;
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.2rem;
 }
 
 .speaker-card-body h4 a {
@@ -1481,25 +1495,25 @@ a:hover { color: var(--color-primary); }
 
 .speaker-role {
   color: #fb923c !important;
-  font-size: 0.76rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  margin-bottom: 0.1rem;
-  line-height: 1.3;
+  margin-bottom: 0.15rem;
+  line-height: 1.32;
 }
 
 .speaker-affil {
   color: #cbd5e1 !important;
-  font-size: 0.72rem;
-  margin-bottom: 0.5rem;
+  font-size: 0.76rem;
+  margin-bottom: 0.55rem;
   font-weight: 500;
 }
 
 .speaker-desc {
   color: #e2e8f0 !important;
-  font-size: 0.76rem;
-  line-height: 1.45;
+  font-size: 0.8rem;
+  line-height: 1.48;
   margin-top: auto;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
 }
 
 /* --- Section Utilities --- */
