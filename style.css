@@ -1372,8 +1372,8 @@ a:hover { color: var(--color-primary); }
 /* Invited Speakers Grid */
 .invited-speakers-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.9rem;
 }
 
 .speaker-card {
@@ -2289,6 +2289,10 @@ a:hover { color: var(--color-primary); }
   object-position: 50% 10% !important;
 }
 
+.photo-kingson {
+  object-position: 50% 18% !important;
+}
+
 /* Backward compatibility for organizers */
 .organizers-grid {
   display: grid;
@@ -2750,6 +2754,13 @@ a:hover { color: var(--color-primary); }
 }
 
 /* --- Responsive --- */
+@media (max-width: 1150px) {
+  .invited-speakers-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.15rem;
+  }
+}
+
 @media (max-width: 968px) {
   .about-grid,
   .cfp-grid,
