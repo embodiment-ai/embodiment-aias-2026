@@ -404,15 +404,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let startX = 0;
     let scrollStart = 0;
     let hasMoved = false;
-    const scrollSpeed = 0.65; // Smooth cinematic glide speed
+    let virtualScrollLeft = reelContainer.scrollLeft || 0;
+    const scrollSpeed = 0.85; // Smooth continuous glide speed
 
     function autoScrollReel() {
       if (!isPaused && !isDragging) {
-        reelContainer.scrollLeft += scrollSpeed;
+        virtualScrollLeft += scrollSpeed;
         const halfWidth = speakersTrack.scrollWidth / 2;
-        if (reelContainer.scrollLeft >= halfWidth) {
-          reelContainer.scrollLeft -= halfWidth;
+        if (halfWidth > 0 && virtualScrollLeft >= halfWidth) {
+          virtualScrollLeft -= halfWidth;
         }
+        reelContainer.scrollLeft = virtualScrollLeft;
+      } else {
+        virtualScrollLeft = reelContainer.scrollLeft;
       }
       requestAnimationFrame(autoScrollReel);
     }
@@ -430,12 +434,14 @@ document.addEventListener('DOMContentLoaded', () => {
       isPaused = true;
       startX = e.pageX - reelContainer.offsetLeft;
       scrollStart = reelContainer.scrollLeft;
+      virtualScrollLeft = scrollStart;
     });
 
     window.addEventListener('mouseup', () => {
       if (isDragging) {
         isDragging = false;
         reelContainer.style.cursor = 'grab';
+        virtualScrollLeft = reelContainer.scrollLeft;
         setTimeout(() => { isPaused = false; }, 800);
       }
     });
@@ -449,16 +455,20 @@ document.addEventListener('DOMContentLoaded', () => {
         reelContainer.style.cursor = 'grabbing';
         e.preventDefault();
         const walk = (x - startX) * 1.35;
-        reelContainer.scrollLeft = scrollStart - walk;
+        let nextScroll = scrollStart - walk;
 
         const halfWidth = speakersTrack.scrollWidth / 2;
-        if (reelContainer.scrollLeft >= halfWidth) {
-          reelContainer.scrollLeft -= halfWidth;
-          scrollStart -= halfWidth;
-        } else if (reelContainer.scrollLeft <= 0) {
-          reelContainer.scrollLeft += halfWidth;
-          scrollStart += halfWidth;
+        if (halfWidth > 0) {
+          if (nextScroll >= halfWidth) {
+            nextScroll -= halfWidth;
+            scrollStart -= halfWidth;
+          } else if (nextScroll <= 0) {
+            nextScroll += halfWidth;
+            scrollStart += halfWidth;
+          }
         }
+        reelContainer.scrollLeft = nextScroll;
+        virtualScrollLeft = nextScroll;
       }
     });
 
@@ -476,6 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     reelContainer.addEventListener('touchend', () => {
+      virtualScrollLeft = reelContainer.scrollLeft;
       setTimeout(() => { isPaused = false; }, 1200);
     }, { passive: true });
 
@@ -484,11 +495,14 @@ document.addEventListener('DOMContentLoaded', () => {
       reelPrevBtn.addEventListener('click', () => {
         isPaused = true;
         const halfWidth = speakersTrack.scrollWidth / 2;
-        if (reelContainer.scrollLeft <= 50) {
+        if (reelContainer.scrollLeft <= 50 && halfWidth > 0) {
           reelContainer.scrollLeft += halfWidth;
         }
         reelContainer.scrollBy({ left: -scrollStep, behavior: 'smooth' });
-        setTimeout(() => { isPaused = false; }, 1500);
+        setTimeout(() => {
+          virtualScrollLeft = reelContainer.scrollLeft;
+          isPaused = false;
+        }, 1200);
       });
     }
 
@@ -496,11 +510,14 @@ document.addEventListener('DOMContentLoaded', () => {
       reelNextBtn.addEventListener('click', () => {
         isPaused = true;
         const halfWidth = speakersTrack.scrollWidth / 2;
-        if (reelContainer.scrollLeft >= halfWidth - 50) {
+        if (halfWidth > 0 && reelContainer.scrollLeft >= halfWidth - 50) {
           reelContainer.scrollLeft -= halfWidth;
         }
         reelContainer.scrollBy({ left: scrollStep, behavior: 'smooth' });
-        setTimeout(() => { isPaused = false; }, 1500);
+        setTimeout(() => {
+          virtualScrollLeft = reelContainer.scrollLeft;
+          isPaused = false;
+        }, 1200);
       });
     }
   }
