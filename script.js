@@ -62,9 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, observerOptions);
 
-  // Apply initial hidden state and observe
+  // Apply initial hidden state and observe (exclude horizontal carousel cards)
   const animatedElements = document.querySelectorAll(
-    '.objective-card, .topic-item, .schedule-item, .date-card, .organizer-card, .facilitator-card, .speaker-card, .outcome-item, .submission-type'
+    '.objective-card, .topic-item, .schedule-item, .date-card, .organizer-card, .facilitator-card, .outcome-item, .submission-type'
   );
 
   animatedElements.forEach((el, i) => {
@@ -391,13 +391,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!reelContainer || !speakersTrack) return;
 
-    // Clone cards once for infinite continuous scroll loop
     const originalCards = Array.from(speakersTrack.children);
+    if (originalCards.length === 0) return;
+
+    // Ensure all original cards are fully visible
     originalCards.forEach(card => {
-      const clone = card.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      speakersTrack.appendChild(clone);
+      card.style.opacity = '1';
+      card.style.transform = '';
     });
+
+    // Clone the full set twice (3 sets total) so wide viewports never run out of cards
+    let firstClone = null;
+    for (let copy = 0; copy < 2; copy++) {
+      originalCards.forEach((card, idx) => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.style.opacity = '1';
+        clone.style.transform = '';
+        speakersTrack.appendChild(clone);
+        if (copy === 0 && idx === 0) {
+          firstClone = clone;
+        }
+      });
+    }
+
+    function getLoopWidth() {
+      if (firstClone && originalCards[0]) {
+        const exactOffset = firstClone.offsetLeft - originalCards[0].offsetLeft;
+        if (exactOffset > 0) return exactOffset;
+      }
+      return speakersTrack.scrollWidth / 3;
+    }
 
     let isPaused = false;
     let isDragging = false;
@@ -411,9 +435,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const hasExpandedCard = speakersTrack.querySelector('.is-expanded') !== null;
       if (!isPaused && !isDragging && !hasExpandedCard) {
         virtualScrollLeft += scrollSpeed;
-        const halfWidth = speakersTrack.scrollWidth / 2;
-        if (halfWidth > 0 && virtualScrollLeft >= halfWidth) {
-          virtualScrollLeft -= halfWidth;
+        const loopWidth = getLoopWidth();
+        if (loopWidth > 0 && virtualScrollLeft >= loopWidth) {
+          virtualScrollLeft -= loopWidth;
         }
         reelContainer.scrollLeft = virtualScrollLeft;
       } else {
@@ -458,14 +482,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const walk = (x - startX) * 1.35;
         let nextScroll = scrollStart - walk;
 
-        const halfWidth = speakersTrack.scrollWidth / 2;
-        if (halfWidth > 0) {
-          if (nextScroll >= halfWidth) {
-            nextScroll -= halfWidth;
-            scrollStart -= halfWidth;
+        const loopWidth = getLoopWidth();
+        if (loopWidth > 0) {
+          if (nextScroll >= loopWidth) {
+            nextScroll -= loopWidth;
+            scrollStart -= loopWidth;
           } else if (nextScroll <= 0) {
-            nextScroll += halfWidth;
-            scrollStart += halfWidth;
+            nextScroll += loopWidth;
+            scrollStart += loopWidth;
           }
         }
         reelContainer.scrollLeft = nextScroll;
@@ -495,9 +519,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (reelPrevBtn) {
       reelPrevBtn.addEventListener('click', () => {
         isPaused = true;
-        const halfWidth = speakersTrack.scrollWidth / 2;
-        if (reelContainer.scrollLeft <= 50 && halfWidth > 0) {
-          reelContainer.scrollLeft += halfWidth;
+        const loopWidth = getLoopWidth();
+        if (reelContainer.scrollLeft <= 50 && loopWidth > 0) {
+          reelContainer.scrollLeft += loopWidth;
         }
         reelContainer.scrollBy({ left: -scrollStep, behavior: 'smooth' });
         setTimeout(() => {
@@ -510,9 +534,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (reelNextBtn) {
       reelNextBtn.addEventListener('click', () => {
         isPaused = true;
-        const halfWidth = speakersTrack.scrollWidth / 2;
-        if (halfWidth > 0 && reelContainer.scrollLeft >= halfWidth - 50) {
-          reelContainer.scrollLeft -= halfWidth;
+        const loopWidth = getLoopWidth();
+        if (loopWidth > 0 && reelContainer.scrollLeft >= loopWidth - 50) {
+          reelContainer.scrollLeft -= loopWidth;
         }
         reelContainer.scrollBy({ left: scrollStep, behavior: 'smooth' });
         setTimeout(() => {
