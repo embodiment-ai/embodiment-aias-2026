@@ -415,6 +415,32 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    const allCards = Array.from(speakersTrack.children);
+    function equalizeCardHeights() {
+      let maxH = 0;
+      allCards.forEach(card => {
+        if (!card.classList.contains('is-expanded')) {
+          card.style.minHeight = '0px';
+          card.style.height = 'auto';
+        }
+      });
+      allCards.forEach(card => {
+        if (!card.classList.contains('is-expanded')) {
+          const h = card.offsetHeight;
+          if (h > maxH) maxH = h;
+        }
+      });
+      if (maxH > 0) {
+        allCards.forEach(card => {
+          card.style.minHeight = `${maxH}px`;
+        });
+      }
+    }
+
+    equalizeCardHeights();
+    window.addEventListener('load', equalizeCardHeights);
+    window.addEventListener('resize', equalizeCardHeights);
+
     function getLoopWidth() {
       if (firstClone && originalCards[0]) {
         const exactOffset = firstClone.offsetLeft - originalCards[0].offsetLeft;

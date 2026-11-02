@@ -1380,6 +1380,10 @@ a:hover { color: var(--color-primary); }
   display: flex;
   gap: 1.35rem;
   width: max-content;
+  align-items: stretch;
+}
+
+.invited-speakers-track:has(.is-expanded) {
   align-items: flex-start;
 }
 
@@ -1392,11 +1396,11 @@ a:hover { color: var(--color-primary); }
 }
 
 .invited-speakers-track .speaker-card {
-  min-height: 525px;
+  min-height: 575px;
 }
 
 .invited-speakers-track .speaker-full-card {
-  min-height: 560px;
+  min-height: 615px;
 }
 
 .invited-speakers-track .speaker-card.is-expanded,
@@ -1404,6 +1408,7 @@ a:hover { color: var(--color-primary); }
   width: 340px;
   min-width: 340px;
   max-width: 340px;
+  height: auto !important;
   border-color: rgba(96, 165, 250, 0.75);
   box-shadow: 0 24px 52px -8px rgba(0, 0, 0, 0.85), 0 0 28px rgba(59, 130, 246, 0.3);
 }
@@ -1477,8 +1482,13 @@ a:hover { color: var(--color-primary); }
   cursor: pointer;
   transition: all 0.2s ease;
   margin-top: auto;
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.7rem;
   align-self: flex-start;
+}
+
+.has-expandable-bio .facilitator-links,
+.has-expandable-bio .speaker-full-links {
+  margin-top: 0;
 }
 
 .keynote-card .bio-toggle-btn {
